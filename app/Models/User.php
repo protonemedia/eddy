@@ -53,7 +53,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $name = $this->name;
         $initials = '';
 
-        foreach (explode(' ', $name) as $word) {
+        $parts = array_filter(explode(' ', $name));
+
+        foreach ($parts as $word) {
             $initials .= $word[0];
         }
 
