@@ -1,0 +1,1 @@
+export PHP_BINARY={!! $site->php_version->getBinary() !!}

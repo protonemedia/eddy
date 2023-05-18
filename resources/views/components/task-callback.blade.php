@@ -1,0 +1,1 @@
+{{ $bashFunction }} {{ $url }} {!! $body !!}

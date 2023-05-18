@@ -1,0 +1,38 @@
+www.protone.media:80 {
+	redir {scheme}://protone.media{uri}
+}
+
+# Do not remove this tls-* snippet
+(tls-1) {
+	#
+}
+
+protone.media:80 {
+	root * /home/eddy/protone.media/current/public
+	encode zstd gzip
+
+	import tls-1
+
+	header {
+		-Server
+		X-Content-Type-Options nosniff
+		X-Frame-Options SAMEORIGIN
+		X-Powered-By "Eddy"
+		X-XSS-Protection 1; mode=block
+	}
+
+	php_fastcgi unix//run/php/php8.1-fpm.sock {
+		resolve_root_symlink
+		try_files {path} {path}/index.html {path}/index.htm index.php
+	}
+
+	file_server
+
+	log {
+		output file /home/eddy/protone.media/logs/caddy.log {
+			roll_size 100mb
+			roll_keep 30
+			roll_keep_for 720h
+		}
+	}
+}

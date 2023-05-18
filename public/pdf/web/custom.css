@@ -1,0 +1,13 @@
+#sidebarToggle,
+#sidebarToggle + .toolbarButtonSpacer,
+#viewFind,
+#viewBookmark,
+#viewBookmark + .verticalToolbarSeparator,
+#secondaryToolbarToggle,
+#toolbarViewerRight {
+  display: none;
+}
+
+#toolbarViewerMiddle {
+  margin-right: 0;
+}

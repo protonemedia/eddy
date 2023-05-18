@@ -1,0 +1,1 @@
+tail -c 1M /home/protone/test.txt

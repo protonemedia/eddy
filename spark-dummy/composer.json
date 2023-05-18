@@ -1,0 +1,8 @@
+{
+    "name": "protonemedia/laravel-spark-dummy",
+    "autoload": {
+        "psr-4": {
+            "Spark\\": "src"
+        }
+    }
+}

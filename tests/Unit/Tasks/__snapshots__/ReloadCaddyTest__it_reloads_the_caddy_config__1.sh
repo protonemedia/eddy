@@ -1,0 +1,1 @@
+/usr/sbin/service caddy reload

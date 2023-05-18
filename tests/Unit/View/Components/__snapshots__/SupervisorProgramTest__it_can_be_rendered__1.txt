@@ -1,0 +1,18 @@
+[program:1]
+command=php -v
+autostart=true
+autorestart=true
+startretries=5
+directory=/home/eddy
+numprocs=1
+process_name=%(program_name)s_%(process_num)02d
+user=eddy
+startsecs=10
+stopsignal=TERM
+stopwaitsecs=10
+stopasgroup=true
+killasgroup=true
+stdout_logfile=/home/eddy/.eddy/daemon-1.log
+stderr_logfile=/home/eddy/.eddy/daemon-1.err
+stdout_logfile_maxbytes=5MB
+stderr_logfile_maxbytes=5MB

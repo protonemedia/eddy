@@ -1,0 +1,25 @@
+name: analyse-with-phpstan
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup app
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Execute PHPStan
+        run: composer analyse

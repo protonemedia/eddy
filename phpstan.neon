@@ -1,0 +1,23 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 9 is the highest level
+    level: 5
+
+#   ignoreErrors:
+#       -
+#           message: '#Property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9\\_]+ is never read, only written.#'
+#           paths:
+#               - app/Tasks/*
+
+    excludePaths:
+        - ./app/Actions/Fortify/*
+        - ./app/Actions/Jetstream/*
+        - ./app/Providers/SparkServiceProvider.php
+#
+#    checkMissingIterableValueType: false

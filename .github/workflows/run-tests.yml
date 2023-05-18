@@ -1,0 +1,128 @@
+name: run-tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.2, 8.1]
+
+    name: Test - P${{ matrix.php }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Install Beautysh and Caddy
+        run: |
+          pip install beautysh
+          sudo snap install caddy --edge
+
+      - name: Setup app
+        run: |
+          cp .env.example .env
+          touch database/database.sqlite
+          composer install --prefer-dist --no-interaction --no-progress
+          php artisan google-fonts:fetch
+
+      - name: Run Laravel Server
+        run: php artisan serve &
+
+      - name: Execute tests
+        run: composer test
+
+  dusk:
+    needs: test
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.2, 8.1]
+        ssr: [true, false]
+
+    name: Dusk - P${{ matrix.php }} - SSR ${{ matrix.ssr }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, mysql, mysqli, pdo_mysql, fileinfo
+          coverage: none
+
+      - name: Setup app
+        run: |
+          cp .env.example .env
+          touch database/database.sqlite
+          composer install --prefer-dist --no-interaction --no-progress
+          npm install
+          npm run build
+          php artisan google-fonts:fetch
+          sed -i -e 's/waitSeconds = 5/waitSeconds = 10/g' vendor/laravel/dusk/src/Browser.php
+          php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+
+      - name: Start SSR server
+        run: |
+          sed -i -e "s|SPLADE_SSR_ENABLED=false|SPLADE_SSR_ENABLED=true|g" .env
+          sed -i -e "s|SPLADE_SSR_ENABLED=false|SPLADE_SSR_ENABLED=true|g" .env.dusk
+          node bootstrap/ssr/ssr.mjs &
+        if: matrix.ssr == true
+
+      - name: Verify SSR server
+        run: php artisan splade:ssr-test
+        if: matrix.ssr == true
+
+      - name: Run Laravel Server
+        run: php artisan serve &
+
+      - name: Run Dusk Tests
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: php artisan dusk --env=dusk
+
+      - name: Verify SSR server has not crashed
+        run: php artisan splade:ssr-test
+        if: matrix.ssr == true
+
+      - name: Upload Dusk Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: screenshots
+          path: tests/Browser/screenshots
+
+      - name: Upload Console Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: console
+          path: tests/Browser/console
+
+      - name: Upload Laravel Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: logs
+          path: storage/logs
