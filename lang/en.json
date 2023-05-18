@@ -1,5 +1,6 @@
 {
     ":software will be restarted on the server.": ":software will be restarted on the server.",
+    ":software will now be the CLI default on the server.": ":software will now be the CLI default on the server.",
     "A new verification link has been sent to the email address you provided in your profile settings.": "A new verification link has been sent to the email address you provided in your profile settings.",
     "A new verification link has been sent to your email address.": "A new verification link has been sent to your email address.",
     "API Token": "API Token",
@@ -250,6 +251,8 @@
     "Log in": "Log in",
     "Logs": "Logs",
     "MD5 Fingerprint": "MD5 Fingerprint",
+    "Made ':software' the CLI default on server ':server'": "Made ':software' the CLI default on server ':server'",
+    "Make CLI default": "Make CLI default",
     "Make sure this key is added to Github or other repository provider.": "Make sure this key is added to Github or other repository provider.",
     "Manage API Tokens": "Manage API Tokens",
     "Manage Account": "Manage Account",
