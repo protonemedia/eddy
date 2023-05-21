@@ -255,7 +255,7 @@ class Server extends Model
         return new Connection(
             host: $this->public_ipv4,
             port: $this->ssh_port,
-            username: $this->username,
+            username: $username,
             privateKey: $this->private_key,
             scriptPath: "/home/{$username}/{$this->working_directory}",
             proxyJump: self::randomSshProxy()
