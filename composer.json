@@ -35,6 +35,7 @@
         "jasonmccreary/laravel-test-assertions": "^2.3",
         "laravel/dusk": "^7.7",
         "laravel/pint": "^1.6",
+        "laravel/telescope": "^4.15",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.0",
@@ -96,7 +97,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {
