@@ -3,7 +3,6 @@
 namespace App\SourceControl;
 
 use App\SourceControl\Entities\GitRepository;
-use Github\Client;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
