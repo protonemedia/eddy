@@ -24,10 +24,10 @@ class DeploySite extends Task implements HasCallbacks
         $this->site = $deployment->site;
     }
 
-     public function onOutputUpdated(string $output): void
-     {
-         event(new DeploymentUpdated($this->deployment));
-     }
+    public function onOutputUpdated(string $output): void
+    {
+        event(new DeploymentUpdated($this->deployment));
+    }
 
     protected function onTimeout(TaskModel $task, Request $request)
     {

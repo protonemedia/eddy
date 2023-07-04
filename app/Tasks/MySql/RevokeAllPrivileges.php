@@ -8,16 +8,16 @@ class RevokeAllPrivileges extends MySqlTask
     {
     }
 
-     /**
-      * The SQL query to run.
-      */
-     public function sql(): string
-     {
-         return $this->withHosts(fn ($host) => sprintf(
-             'REVOKE ALL ON %s.* FROM %s@%s;',
-             static::wrapValue($this->database),
-             static::wrapValue($this->name),
-             static::wrapValue($host),
-         )).' FLUSH PRIVILEGES;';
-     }
+    /**
+     * The SQL query to run.
+     */
+    public function sql(): string
+    {
+        return $this->withHosts(fn ($host) => sprintf(
+            'REVOKE ALL ON %s.* FROM %s@%s;',
+            static::wrapValue($this->database),
+            static::wrapValue($this->name),
+            static::wrapValue($host),
+        )).' FLUSH PRIVILEGES;';
+    }
 }
