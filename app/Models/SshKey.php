@@ -37,7 +37,7 @@ class SshKey extends Model
 
     public function getFingerprintAttribute(): string
     {
-        return static::generateFingerprint($this->public_key);
+        return static::generateFingerprint($this->public_key) ?: '';
     }
 
     /**
