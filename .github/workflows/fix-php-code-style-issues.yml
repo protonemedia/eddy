@@ -25,7 +25,9 @@ jobs:
           coverage: none
 
       - name: Setup app
-        run: composer install --prefer-dist --no-interaction --no-progress
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          npm install
 
       - name: Fix PHP code style issues
         run: composer format-php
