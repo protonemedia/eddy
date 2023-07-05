@@ -7,7 +7,7 @@
 
     @include('teams.update-team-name-form')
 
-    @if($permissions['canAddTeamMembers'])
+    @if ($permissions['canAddTeamMembers'])
         <x-section-border />
 
         <div class="mt-10 sm:mt-0" dusk="add-team-member">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    @if($permissions['canAddTeamMembers'] && $team->teamInvitations->isNotEmpty())
+    @if ($permissions['canAddTeamMembers'] && $team->teamInvitations->isNotEmpty())
         <x-section-border />
 
         <div class="mt-10 sm:mt-0" dusk="team-member-invitations">
@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    @if($team->users->isNotEmpty())
+    @if ($team->users->isNotEmpty())
         <x-section-border />
 
         <div class="mt-10 sm:mt-0" dusk="manage-team-members">
@@ -31,7 +31,7 @@
         </div>
     @endif
 
-    @if($permissions['canDeleteTeam'] && !$team->personal_team)
+    @if ($permissions['canDeleteTeam'] && ! $team->personal_team)
         <x-section-border />
 
         <div class="mt-10 sm:mt-0" dusk="delete-team-form">

@@ -9,7 +9,7 @@
         {{ __('Manage your Firewall Rules.') }}
     </x-slot>
 
-    @if($firewallRules->isNotEmpty())
+    @if ($firewallRules->isNotEmpty())
         <x-slot:actions>
             <x-splade-button type="link" modal href="{{ route('servers.firewall-rules.create', $server) }}">
                 {{ __('Add Firewall Rule') }}

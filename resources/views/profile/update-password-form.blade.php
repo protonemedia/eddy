@@ -10,7 +10,13 @@
 
         <x-slot:form>
             <div class="col-span-6 sm:col-span-4">
-                <x-splade-input id="current_password" type="password" name="current_password" :label="__('Current Password')" autocomplete="current-password" />
+                <x-splade-input
+                    id="current_password"
+                    type="password"
+                    name="current_password"
+                    :label="__('Current Password')"
+                    autocomplete="current-password"
+                />
             </div>
 
             <div class="col-span-6 sm:col-span-4">
@@ -18,7 +24,13 @@
             </div>
 
             <div class="col-span-6 sm:col-span-4">
-                <x-splade-input id="password_confirmation" type="password" name="password_confirmation" :label="__('Confirm Password')" autocomplete="new-password" />
+                <x-splade-input
+                    id="password_confirmation"
+                    type="password"
+                    name="password_confirmation"
+                    :label="__('Confirm Password')"
+                    autocomplete="new-password"
+                />
             </div>
         </x-slot>
 

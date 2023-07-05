@@ -10,7 +10,7 @@
     </x-slot>
 
     <x-slot:actions>
-        @if($crons->isNotEmpty())
+        @if ($crons->isNotEmpty())
             <x-splade-button type="link" modal href="{{ route('servers.crons.create', $server) }}">
                 {{ __('Add Cron') }}
             </x-splade-button>

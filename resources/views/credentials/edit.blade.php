@@ -31,7 +31,7 @@
                     :help="__('Only fill this field if you want to change the token.')"
                 />
 
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center justify-between">
                     <x-splade-submit v-show="form.provider != 'github'" :label="__('Save')" />
 
                     <x-splade-link confirm-danger method="DELETE" :href="route('credentials.destroy', $credentials)">

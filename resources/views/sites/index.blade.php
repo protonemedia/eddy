@@ -13,7 +13,7 @@
         </x-splade-button>
     </x-slot>
 
-    @if($sites->isNotEmpty())
+    @if ($sites->isNotEmpty())
         <x-slot:actions>
             <x-splade-button type="link" modal href="{{ route('servers.sites.create', $server) }}">
                 {{ __('New Site') }}

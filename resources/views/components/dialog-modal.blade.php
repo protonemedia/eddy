@@ -8,6 +8,6 @@
     </div>
 </div>
 
-<div class="flex flex-row justify-end px-6 py-4 bg-gray-100 text-right rounded-b">
+<div class="flex flex-row justify-end rounded-b bg-gray-100 px-6 py-4 text-right">
     {{ $footer }}
 </div>

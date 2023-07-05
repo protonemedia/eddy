@@ -1,0 +1,18 @@
+{
+    "tailwindConfig": "./tailwind.config.js",
+    "plugins": [
+        "./node_modules/prettier-plugin-blade/",
+        "./node_modules/prettier-plugin-tailwindcss/"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.blade.php"
+            ],
+            "options": {
+                "parser": "blade"
+            }
+        }
+    ],
+    "printWidth": 160
+}

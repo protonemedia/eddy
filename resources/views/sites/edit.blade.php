@@ -5,7 +5,7 @@
         </x-slot>
 
         <x-slot:content>
-            @if($site->pending_caddyfile_update_since)
+            @if ($site->pending_caddyfile_update_since)
                 {{ __('The Caddyfile for this site is currently being updated. This may take a few minutes.') }}
             @else
                 <x-splade-form
@@ -21,7 +21,7 @@
                         <x-splade-input name="web_folder" :label="__('Web Folder')" />
                     </div>
 
-                    @if($site->repository_url)
+                    @if ($site->repository_url)
                         <x-splade-input name="repository_url" :label="__('Repository URL')" />
                         <x-splade-input name="repository_branch" :label="__('Repository Branch')" />
                     @endif

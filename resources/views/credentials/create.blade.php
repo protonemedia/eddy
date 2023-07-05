@@ -22,19 +22,9 @@
                     :help="__('By binding the new credentials to your current team, you can only use them for this team. Uncheck this option to make the credentials available for teams you are a member of.')"
                 />
 
-                <x-splade-textarea
-                    autosize
-                    v-show="form.provider == 'digital_ocean'"
-                    name="credentials.digital_ocean_token"
-                    :label="__('API Token')"
-                />
+                <x-splade-textarea autosize v-show="form.provider == 'digital_ocean'" name="credentials.digital_ocean_token" :label="__('API Token')" />
 
-                <x-splade-textarea
-                    autosize
-                    v-show="form.provider == 'hetzner_cloud'"
-                    name="credentials.hetzner_cloud_token"
-                    :label="__('API Token')"
-                />
+                <x-splade-textarea autosize v-show="form.provider == 'hetzner_cloud'" name="credentials.hetzner_cloud_token" :label="__('API Token')" />
 
                 <p v-if="form.provider == 'github'">
                     {{ __('Connecting to Github will allow you to quickly select repositories and branches when deploying new sites.') }}
@@ -57,5 +47,5 @@
                 </div>
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-app-layout>

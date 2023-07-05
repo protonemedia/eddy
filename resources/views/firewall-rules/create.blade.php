@@ -5,9 +5,15 @@
         </x-slot>
 
         <x-slot:content>
-            <x-splade-form :action="route('servers.firewall-rules.store', $server)" :default="[
-                'user' => $server->username
-            ]" class="space-y-4">
+            <x-splade-form
+                :action="route('servers.firewall-rules.store', $server)"
+                :default="
+                    [
+                        'user' => $server->username,
+                    ]
+                "
+                class="space-y-4"
+            >
                 <x-splade-input name="name" :label="__('Name')" />
                 <x-splade-radios name="action" :label="__('Action')" :options="$actions" inline />
 
@@ -19,5 +25,5 @@
                 <x-splade-submit :label="__('Deploy')" />
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>

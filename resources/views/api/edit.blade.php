@@ -9,7 +9,7 @@
             <x-slot:content>
                 <x-splade-checkboxes
                     name="permissions"
-                    class="grid grid-cols-1 md:grid-cols-2 gap-1"
+                    class="grid grid-cols-1 gap-1 md:grid-cols-2"
                     :options="array_combine($availablePermissions, $availablePermissions)"
                 />
             </x-slot>

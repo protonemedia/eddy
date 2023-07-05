@@ -13,7 +13,7 @@
                 method="GET"
                 :action="$file->showRoute($server)"
                 :default="['lines' => $lines]"
-                class="flex flex-row items-end space-x-4 mb-4"
+                class="mb-4 flex flex-row items-end space-x-4"
                 keep-modal
             >
                 <x-splade-input name="lines" min="1" max="1000" type="number" :append="__('Lines')" class="max-w-fit" />
@@ -26,10 +26,10 @@
                         {{ __('Retrieving the file from the server...') }}
                         @svg('heroicon-s-cog-6-tooth', 'h-5 w-5 text-gray-400 ml-2 animate-spin')
                     </div>
-                </x-slot:placeholder>
+                </x-slot>
 
                 <x-prism-viewer :value="$contents" :language="$file->prismLanguage->value" />
             </x-splade-lazy>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>

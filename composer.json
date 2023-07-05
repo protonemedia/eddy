@@ -92,7 +92,8 @@
             "@putenv XDEBUG_MODE=coverage",
             "@php artisan test --coverage"
         ],
-        "format": "vendor/bin/pint"
+        "format-php": "vendor/bin/pint",
+        "format-blade": "node_modules/prettier/bin-prettier.js -w resources/views/"
     },
     "extra": {
         "laravel": {

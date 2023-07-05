@@ -16,15 +16,14 @@
                     <x-splade-select name="stop_signal" :label="__('Stop Signal')" :options="$signals" />
                 </div>
 
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center justify-between">
                     <x-splade-submit :label="__('Deploy')" />
 
                     <x-splade-link confirm-danger method="DELETE" :href="route('servers.daemons.destroy', [$server, $daemon])">
                         <x-splade-button danger :label="__('Delete Daemon')" />
                     </x-splade-link>
                 </div>
-
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>
