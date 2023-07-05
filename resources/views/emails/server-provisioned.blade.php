@@ -16,9 +16,15 @@
     {{ __('Below you will find the details of your server.') }}
 
     @component('mail::panel')
-            {{ __('Username') }}: `{{ $server->username }}` {{ __('Password') }}: `{{ $server->password }}` {{ __('IP Address') }}:
-            `{{ $server->public_ipv4 }}` {{ __('Database Username') }}: `{{ config('eddy.server_defaults.database_name') }}` {{ __('Database Password') }}:
-            `{{ $server->database_password }}`
+        {{ __('Username') }}: `{{ $server->username }}`
+        <br />
+        {{ __('Password') }}: `{{ $server->password }}`
+        <br />
+        {{ __('IP Address') }}: `{{ $server->public_ipv4 }}`
+        <br />
+        {{ __('Database Username') }}: `{{ config('eddy.server_defaults.database_name') }}`
+        <br />
+        {{ __('Database Password') }}: `{{ $server->database_password }}`
     @endcomponent
 
     {{ __('Good luck with your new server!') }}
