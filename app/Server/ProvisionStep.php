@@ -21,14 +21,14 @@ enum ProvisionStep: string
     public static function forFreshServer(): array
     {
         return [
-            static::ConfigureSwap,
-            static::ConfigureFirewall,
-            static::AptUpdateUpgrade,
-            static::InstallEssentialPackages,
-            static::SetupUnattendedUpgrades,
-            static::SetupRoot,
-            static::SshSecurity,
-            static::SetupDefaultUser,
+            self::ConfigureSwap,
+            self::ConfigureFirewall,
+            self::AptUpdateUpgrade,
+            self::InstallEssentialPackages,
+            self::SetupUnattendedUpgrades,
+            self::SetupRoot,
+            self::SshSecurity,
+            self::SetupDefaultUser,
         ];
     }
 

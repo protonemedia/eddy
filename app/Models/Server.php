@@ -171,19 +171,19 @@ class Server extends Model
         return $this;
     }
 
-   /**
-    * Returns a signed URL that containts the script to connect a custom server to the app.
-    */
-   public function provisionScriptUrl(): string
-   {
-       $host = rtrim(config('eddy.webhook_url') ?: config('app.url'), '/');
+    /**
+     * Returns a signed URL that containts the script to connect a custom server to the app.
+     */
+    public function provisionScriptUrl(): string
+    {
+        $host = rtrim(config('eddy.webhook_url') ?: config('app.url'), '/');
 
-       return $host.URL::signedRoute(
-           name: 'servers.provisionScript',
-           parameters: ['server' => $this],
-           absolute: false
-       );
-   }
+        return $host.URL::signedRoute(
+            name: 'servers.provisionScript',
+            parameters: ['server' => $this],
+            absolute: false
+        );
+    }
 
     /**
      * A bash provision command used to start the provision of custom servers.
