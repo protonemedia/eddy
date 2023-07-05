@@ -11,15 +11,14 @@
                 <x-splade-radios name="frequency" :label="__('Frequency')" :options="$frequencies" />
                 <x-splade-input v-if="form.frequency == 'custom'" name="custom_expression" :label="__('Expression')" />
 
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center justify-between">
                     <x-splade-submit :label="__('Deploy')" />
 
                     <x-splade-link confirm-danger method="DELETE" :href="route('servers.crons.destroy', [$server, $cron])">
                         <x-splade-button danger :label="__('Delete Cron')" />
                     </x-splade-link>
                 </div>
-
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>

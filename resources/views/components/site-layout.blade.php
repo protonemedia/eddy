@@ -2,7 +2,10 @@
 
 <x-sidebar-layout :$navigationItems :$href>
     <x-slot:header>
-        {{ $site->address }} @isset($title) - {{ $title }} @endisset
+        {{ $site->address }}
+        @isset($title)
+            - {{ $title }}
+        @endisset
     </x-slot>
 
     <x-slot:description>
@@ -11,15 +14,15 @@
                 {{ $server->name }}
             </Link>
 
-            <div class='w-1 h-1 bg-gray-400 rounded-full' />
+            <div class="h-1 w-1 rounded-full bg-gray-400" />
 
             <span>{{ $site->php_version->getDisplayName() }}</span>
 
-            <div class='w-1 h-1 bg-gray-400 rounded-full' />
+            <div class="h-1 w-1 rounded-full bg-gray-400" />
 
             <p class="flex flex-row items-center">
                 <span>{{ $server->public_ipv4 }}</span>
-                <x-clipboard class="ml-1 w-4 h-4">{{ $server->public_ipv4 }}</x-clipboard>
+                <x-clipboard class="ml-1 h-4 w-4">{{ $server->public_ipv4 }}</x-clipboard>
             </p>
         </div>
     </x-slot>
@@ -33,7 +36,7 @@
             class="flex items-center justify-center"
             dusk="deploy-site"
         >
-            @if($site->isDeploying())
+            @if ($site->isDeploying())
                 @svg('heroicon-o-cog-6-tooth', 'h-5 w-5 -ml-1 mr-2 animate-spin')
                 <span>{{ __('Deploying...') }}</span>
             @else

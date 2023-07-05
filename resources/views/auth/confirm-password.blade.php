@@ -12,7 +12,7 @@
     <x-splade-form class="space-y-4" :action="route('password.confirm')">
         <x-splade-input id="password" name="password" type="password" :label="__('Password')" required autocomplete="current-password" autofocus />
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="mt-4 flex items-center justify-end">
             <x-splade-submit :label="__('Confirm')" />
         </div>
     </x-splade-form>

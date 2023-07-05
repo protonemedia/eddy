@@ -25,8 +25,12 @@
                 <x-splade-input name="recovery_code" autocomplete="one-time-code" autofocus :label="__('Recovery Code')" />
             </div>
 
-            <div class="flex items-center justify-end mt-4 space-x-4">
-                <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer" @click.prevent="data.recovery = !data.recovery">
+            <div class="mt-4 flex items-center justify-end space-x-4">
+                <button
+                    type="button"
+                    class="cursor-pointer text-sm text-gray-600 underline hover:text-gray-900"
+                    @click.prevent="data.recovery = !data.recovery"
+                >
                     <span v-show="data.recovery">
                         {{ __('Use a recovery code') }}
                     </span>

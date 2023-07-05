@@ -1,33 +1,40 @@
 @seoTitle(__('Terms of Service'))
 
 <div class="font-sans text-gray-900 antialiased">
-    <div class="pt-4 bg-gray-100">
-        <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
+    <div class="bg-gray-100 pt-4">
+        <div class="flex min-h-screen flex-col items-center pt-6 sm:pt-0">
             <div>
                 <x-authentication-card-logo />
             </div>
 
-            <x-splade-content class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose" :html="$terms" />
+            <x-splade-content class="prose mt-6 w-full overflow-hidden bg-white p-6 shadow-md sm:max-w-2xl sm:rounded-lg" :html="$terms" />
 
-            <div class="flex justify-center items-center space-x-4 mt-8">
+            <div class="mt-8 flex items-center justify-center space-x-4">
                 <a
                     download
-                    class="border rounded-md shadow-sm font-bold py-2 px-4 focus:outline-none focus:ring focus:ring-opacity-50 bg-indigo-500 hover:bg-indigo-700 text-white border-transparent focus:border-indigo-300 focus:ring-indigo-200"
+                    class="rounded-md border border-transparent bg-indigo-500 px-4 py-2 font-bold text-white shadow-sm hover:bg-indigo-700 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     href="{{ Storage::url('nl-digital-voowaarden-en.pdf') }}"
-                    target="_blank">{{ __('Download PDF') }}</a>
+                    target="_blank"
+                >
+                    {{ __('Download PDF') }}
+                </a>
 
                 <a
-                    class="border rounded-md shadow-sm font-bold py-2 px-4 focus:outline-none focus:ring focus:ring-opacity-50 bg-indigo-500 hover:bg-indigo-700 text-white border-transparent focus:border-indigo-300 focus:ring-indigo-200"
+                    class="rounded-md border border-transparent bg-indigo-500 px-4 py-2 font-bold text-white shadow-sm hover:bg-indigo-700 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     rel="noopener noreferrer"
                     href="https://get.adobe.com/reader/?loc=en"
-                    target="_blank">{{ __('Download Acrobat Reader') }}</a>
+                    target="_blank"
+                >
+                    {{ __('Download Acrobat Reader') }}
+                </a>
             </div>
 
-            <div class="relative w-full sm:max-w-5xl mt-8" style="padding-top: 137%">
+            <div class="relative mt-8 w-full sm:max-w-5xl" style="padding-top: 137%">
                 <iframe
-                    class="w-full h-full absolute inset-0"
+                    class="absolute inset-0 h-full w-full"
                     src="/pdf/web/viewer.html?file={{ Storage::url('nl-digital-voowaarden-en.pdf') }}"
-                    scrolling="no"></iframe>
+                    scrolling="no"
+                ></iframe>
             </div>
         </div>
     </div>

@@ -1,8 +1,11 @@
-<PrismEditor {{ $attributes->merge([
-    'name' => $name,
-    'v-model' => $vueModel(),
-    'data-validation-key' => $validationKey(),
-])->except('class') }} #default="{ prism }">
+<PrismEditor
+    {{ $attributes->merge([
+        'name' => $name,
+        'v-model' => $vueModel(),
+        'data-validation-key' => $validationKey(),
+    ])->except('class') }}
+    #default="{ prism }"
+>
     <div {{ $attributes->only('class') }}>
         <label class="block">
             @includeWhen($label, 'splade::form.label', ['label' => $label])

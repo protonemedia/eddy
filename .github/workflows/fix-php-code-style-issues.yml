@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   php-code-styling:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     permissions:
       # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
@@ -12,12 +12,28 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          extensions: dom, curl, libxml, mbstring, zip
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Setup app
+        run: |
+          composer install --prefer-dist --no-interaction --no-progress
+          npm install
+
       - name: Fix PHP code style issues
-        uses: aglipanci/laravel-pint-action@2.3.0
+        run: composer format-php
+
+      - name: Fix Blade code style issues
+        run: composer format-blade
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4

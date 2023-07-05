@@ -12,12 +12,12 @@
             <!-- Team Owner Information -->
             <div class="col-span-6">
                 <x-splade-group :label="__('Team Owner')">
-                    <div class="flex items-center mt-2">
-                        <img class="w-12 h-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" :alt="@js($team->owner->name)">
+                    <div class="mt-2 flex items-center">
+                        <img class="h-12 w-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" :alt="@js($team->owner->name)" />
 
                         <div class="ml-4 leading-tight">
                             <div class="text-gray-900" v-text="@js($team->owner->name)" />
-                            <div class="text-gray-700 text-sm">
+                            <div class="text-sm text-gray-700">
                                 {{ $team->owner->email }}
                             </div>
                         </div>
@@ -27,11 +27,11 @@
 
             <!-- Team Name -->
             <div class="col-span-6 sm:col-span-4">
-                <x-splade-input id="name" name="name" :label="__('Team Name')" :disabled="!$permissions['canUpdateTeam']" />
+                <x-splade-input id="name" name="name" :label="__('Team Name')" :disabled="! $permissions['canUpdateTeam']" />
             </div>
         </x-slot>
 
-        @if($permissions['canUpdateTeam'])
+        @if ($permissions['canUpdateTeam'])
             <x-slot:actions>
                 <x-action-message v-if="form.recentlySuccessful" class="mr-3">
                     {{ __('Saved.') }}

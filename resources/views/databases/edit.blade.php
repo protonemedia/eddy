@@ -8,13 +8,12 @@
             <x-splade-form :default="$database" class="space-y-4">
                 <x-splade-input name="name" :label="__('Name')" disabled />
 
-                <div class="flex flex-row justify-between items-center">
+                <div class="flex flex-row items-center justify-between">
                     <x-splade-link confirm-danger method="DELETE" :href="route('servers.databases.destroy', [$server, $database])">
                         <x-splade-button danger :label="__('Delete Database')" />
                     </x-splade-link>
                 </div>
-
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>

@@ -12,9 +12,9 @@
 
         <x-slot:content>
             <x-splade-form :action="route('ssh-keys.servers.remove', $sshKey)" class="space-y-4">
-                <x-splade-checkboxes :options="$servers" name="servers"  />
+                <x-splade-checkboxes :options="$servers" name="servers" />
                 <x-splade-submit />
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-app-layout>

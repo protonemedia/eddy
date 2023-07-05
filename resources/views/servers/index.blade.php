@@ -9,7 +9,7 @@
         {{ __('Manage your servers.') }}
     </x-slot>
 
-    @if($servers->isNotEmpty())
+    @if ($servers->isNotEmpty())
         <x-slot:actions>
             <x-splade-button type="link" modal href="{{ route('servers.create') }}">
                 {{ __('New Server') }}

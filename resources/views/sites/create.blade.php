@@ -5,14 +5,19 @@
         </x-slot>
 
         <x-slot:content>
-            <x-splade-form :action="route('servers.sites.store', $server)" :default="[
-                'php_version' => array_keys($phpVersions)[0],
-                'zero_downtime_deployment' => true,
-                'type' => 'laravel',
-                'web_folder' => '/public',
-                'repository_branch' => 'main',
-                'deploy_key_uuid' => null,
-            ]">
+            <x-splade-form
+                :action="route('servers.sites.store', $server)"
+                :default="
+                    [
+                        'php_version' => array_keys($phpVersions)[0],
+                        'zero_downtime_deployment' => true,
+                        'type' => 'laravel',
+                        'web_folder' => '/public',
+                        'repository_branch' => 'main',
+                        'deploy_key_uuid' => null,
+                    ]
+                "
+            >
                 <div class="space-y-4">
                     <x-splade-input name="address" :label="__('Hostname')" prepend="https://" autofocus />
 
@@ -30,7 +35,7 @@
                 <div v-if="form.type != 'wordpress'" class="space-y-4">
                     <div class="my-8 h-px bg-slate-200" />
 
-                    @if($hasGithubCredentials)
+                    @if ($hasGithubCredentials)
                         <x-splade-select name="repository_url" :label="__('Github Repository')" :remote-url="route('github.repositories')" />
                     @endif
 
@@ -55,19 +60,11 @@
                             :value="trim($deployKey->publicKey)"
                         />
 
-                        <x-splade-button
-                            v-if="!form.deploy_key_uuid"
-                            @click.prevent="form.deploy_key_uuid = {{ Js::from($deployKeyUuid) }}"
-                            secondary
-                        >
+                        <x-splade-button v-if="!form.deploy_key_uuid" @click.prevent="form.deploy_key_uuid = {{ Js::from($deployKeyUuid) }}" secondary>
                             {{ __('Use a Deploy Key') }}
                         </x-splade-button>
 
-                        <x-splade-button
-                            v-if="form.deploy_key_uuid"
-                            @click.prevent="form.deploy_key_uuid = null"
-                            secondary
-                        >
+                        <x-splade-button v-if="form.deploy_key_uuid" @click.prevent="form.deploy_key_uuid = null" secondary>
                             {{ __('Use the Server\'s Public Key') }}
                         </x-splade-button>
                     </x-splade-toggle>
@@ -76,5 +73,5 @@
                 <x-splade-submit class="mt-8" :label="__('Deploy Now')" />
             </x-splade-form>
         </x-slot>
-    </x-action>
+    </x-action-section>
 </x-server-layout>

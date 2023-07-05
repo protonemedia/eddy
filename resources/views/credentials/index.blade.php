@@ -9,7 +9,7 @@
         {{ __('Manage your credentials.') }}
     </x-slot>
 
-    @if($credentials->isNotEmpty())
+    @if ($credentials->isNotEmpty())
         <x-slot:actions>
             <x-splade-button type="link" modal href="{{ route('credentials.create') }}">
                 {{ __('Add Credentials') }}
@@ -19,7 +19,7 @@
 
     <x-splade-table :for="$credentials">
         <x-splade-cell actions>
-            @if($item->canBeUsedByTeam(auth()->user()->currentTeam))
+            @if ($item->canBeUsedByTeam(auth()->user()->currentTeam))
                 <x-splade-button secondary type="link" modal href="{{ route('servers.create', ['credentials' => $item->id]) }}">
                     {{ __('Create Server') }}
                 </x-splade-button>

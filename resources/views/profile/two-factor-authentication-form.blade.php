@@ -8,8 +8,8 @@
     </x-slot>
 
     @php
-        $enabled = !empty(auth()->user()->two_factor_secret);
-        $showingQrCode = $enabled && !auth()->user()->two_factor_confirmed_at;
+        $enabled = ! empty(auth()->user()->two_factor_secret);
+        $showingQrCode = $enabled && ! auth()->user()->two_factor_confirmed_at;
         $showingConfirmation = $showingQrCode && $confirmsTwoFactorAuthentication;
     @endphp
 
@@ -50,13 +50,16 @@
                     </div>
 
                     <div class="mt-4 max-w-xl text-sm text-gray-600">
-                        <p class="font-semibold">
-                            {{ __('Setup Key') }}: {{ decrypt(auth()->user()->two_factor_secret) }}
-                        </p>
+                        <p class="font-semibold">{{ __('Setup Key') }}: {{ decrypt(auth()->user()->two_factor_secret) }}</p>
                     </div>
 
                     @if ($showingConfirmation)
-                        <x-splade-form action="/user/confirmed-two-factor-authentication" class="mt-4 w-1/2 space-y-4" preserve-scroll :scroll-on-error="false">
+                        <x-splade-form
+                            action="/user/confirmed-two-factor-authentication"
+                            class="mt-4 w-1/2 space-y-4"
+                            preserve-scroll
+                            :scroll-on-error="false"
+                        >
                             <x-splade-input name="code" label="Code" inputmode="numeric" autofocus autocomplete="one-time-code" />
 
                             <x-splade-teleport to="#confirm-two-factor-authentication">
@@ -74,7 +77,7 @@
                         </p>
                     </div>
 
-                    <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg">
+                    <div class="mt-4 grid max-w-xl gap-1 rounded-lg bg-gray-100 px-4 py-4 font-mono text-sm">
                         @foreach (json_decode(decrypt(auth()->user()->two_factor_recovery_codes), true) as $code)
                             <div>{{ $code }}</div>
                         @endforeach
@@ -83,7 +86,7 @@
             @endif
 
             <div class="mt-5">
-                @if (!$enabled)
+                @if (! $enabled)
                     <x-splade-form action="/user/two-factor-authentication" confirm require-password preserve-scroll>
                         <x-splade-submit :label="__('Enable')" />
                     </x-splade-form>
@@ -92,7 +95,13 @@
                         @if ($showingConfirmation)
                             <div id="confirm-two-factor-authentication" />
                         @else
-                            <x-splade-form v-if="!data.showingRecoveryCodes" action="#" confirm require-password @success="() => data.showingRecoveryCodes = true">
+                            <x-splade-form
+                                v-if="!data.showingRecoveryCodes"
+                                action="#"
+                                confirm
+                                require-password
+                                @success="() => data.showingRecoveryCodes = true"
+                            >
                                 <x-splade-submit secondary :label="__('Show Recovery Codes')" />
                             </x-splade-form>
 

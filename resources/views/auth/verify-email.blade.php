@@ -10,7 +10,7 @@
             {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
         </div>
 
-        <div v-if="form.wasSuccessful" class="mb-4 font-medium text-sm text-green-600">
+        <div v-if="form.wasSuccessful" class="mb-4 text-sm font-medium text-green-600">
             {{ __('A new verification link has been sent to the email address you provided in your profile settings.') }}
         </div>
 
@@ -20,15 +20,19 @@
             <div>
                 <Link
                     href="{{ route('profile.show') }}"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >{{ __('Edit Profile') }}</Link>
+                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    {{ __('Edit Profile') }}
+                </Link>
 
                 <Link
                     href="{{ route('logout') }}"
                     method="post"
                     as="button"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ml-2"
-                >{{ __('Log Out') }}</Link>
+                    class="ml-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    {{ __('Log Out') }}
+                </Link>
             </div>
         </div>
     </x-splade-form>

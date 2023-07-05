@@ -1,3 +1,3 @@
-<div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
+<div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
     {{ $slot }}
 </div>

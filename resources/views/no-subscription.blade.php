@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-slot:description>
-        <p class="text-red-500 text-lg">{{ __('Whoops! It looks like you don\'t have an active subscription or your trial has expired.') }}</p>
+        <p class="text-lg text-red-500">{{ __('Whoops! It looks like you don\'t have an active subscription or your trial has expired.') }}</p>
     </x-slot>
 
     <x-panel>

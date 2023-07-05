@@ -5,8 +5,8 @@
         <x-authentication-card-logo />
     </x-slot>
 
-    @if($status = session('status'))
-        <div class="mb-4 font-medium text-sm text-green-600">
+    @if ($status = session('status'))
+        <div class="mb-4 text-sm font-medium text-green-600">
             {{ $status }}
         </div>
     @endif
@@ -16,9 +16,12 @@
         <x-splade-input id="password" name="password" type="password" :label="__('Password')" required autocomplete="current-password" />
         <x-splade-checkbox name="remember">{{ __('Remember me') }}</x-splade-checkbox>
 
-        <div class="flex items-center justify-end mt-4">
-            @if(Route::has('password.request'))
-                <Link href="{{ route('password.request') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        <div class="mt-4 flex items-center justify-end">
+            @if (Route::has('password.request'))
+                <Link
+                    href="{{ route('password.request') }}"
+                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
                     {{ __('Forgot your password?') }}
                 </Link>
             @endif

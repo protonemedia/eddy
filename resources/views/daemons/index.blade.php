@@ -10,7 +10,7 @@
     </x-slot>
 
     <x-slot:actions>
-        @if($daemons->isNotEmpty())
+        @if ($daemons->isNotEmpty())
             <x-splade-button type="link" modal href="{{ route('servers.daemons.create', $server) }}">
                 {{ __('Add Daemon') }}
             </x-splade-button>

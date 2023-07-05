@@ -24,7 +24,7 @@
 
                 <x-description-list-item :label="__('Path')">
                     <span>{{ $site->path }}</span>
-                    <x-clipboard class="ml-1 w-5 h-5">{{ $site->path }}</x-clipboard>
+                    <x-clipboard class="ml-1 h-5 w-5">{{ $site->path }}</x-clipboard>
                 </x-description-list-item>
 
                 <x-description-list-item :label="__('PHP Version')">
@@ -33,22 +33,20 @@
 
                 <x-description-list-item :label="__('Type')">
                     {{ $site->type->getDisplayName() }}
-            </x-description-list-item>
+                </x-description-list-item>
 
-            <x-description-list-item :label="__('SSL')">
-                {{ $site->tls_setting->getDisplayName() }}
-            </x-description-list-item>
+                <x-description-list-item :label="__('SSL')">
+                    {{ $site->tls_setting->getDisplayName() }}
+                </x-description-list-item>
 
-                @if($site->repository_url)
-                    <x-description-list-item :label="__('Repository')">
-                        {{ $site->repository_url }} ({{ $site->repository_branch }})
-                    </x-description-list-item>
+                @if ($site->repository_url)
+                    <x-description-list-item :label="__('Repository')">{{ $site->repository_url }} ({{ $site->repository_branch }})</x-description-list-item>
                 @endif
             </dl>
-        </x-slot:content>
+        </x-slot>
     </x-action-section>
 
-    <x-action-section in-sidebar-layout class='mt-8 '>
+    <x-action-section in-sidebar-layout class="mt-8">
         <x-slot:title>
             {{ __('Deployment') }}
         </x-slot>
@@ -59,9 +57,12 @@
                     {{ $site->zero_downtime_deployment ? __('Yes') : __('No') }}
                 </x-description-list-item>
 
-                @if($site->latestDeployment)
+                @if ($site->latestDeployment)
                     <x-description-list-item :label="__('Latest Deployment')">
-                        <Link class="underline" href="{{ route('servers.sites.deployments.show', [$server, $site, $site->latestDeployment]) }}">
+                        <Link
+                            class="underline"
+                            href="{{ route('servers.sites.deployments.show', [$server, $site, $site->latestDeployment]) }}"
+                        >
                             {{ $site->latestDeployment->updated_at }}
                         </Link>
                     </x-description-list-item>
@@ -78,15 +79,16 @@
                         href="{{ route('servers.sites.refresh-deploy-token', [$server, $site]) }}"
                         confirm="{{ __('Are you sure you want to regenerate the deploy token?') }}"
                         confirm-text="{{ __('This will invalidate the current deploy token.') }}"
-                        class="ml-1">
+                        class="ml-1"
+                    >
                         @svg('heroicon-o-arrow-path', 'w-5 h-5 text-gray-700')
                     </Link>
                 </x-description-list-item>
             </dl>
-        </x-slot:content>
+        </x-slot>
     </x-action-section>
 
-    <x-action-section in-sidebar-layout class='mt-8'>
+    <x-action-section in-sidebar-layout class="mt-8">
         <x-slot:title>
             {{ __('Delete Site') }}
         </x-slot>
@@ -99,6 +101,6 @@
             <x-splade-form confirm-danger method="DELETE" :action="route('servers.sites.destroy', [$server, $site])">
                 <x-splade-submit danger :label="__('Delete Site')" />
             </x-splade-form>
-        </x-slot:content>
+        </x-slot>
     </x-action-section>
 </x-site-layout>
