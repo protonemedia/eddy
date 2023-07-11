@@ -1,3 +1,4 @@
 resources/views/tasks/**/*.blade.php
+resources/views/vendor/**/*.blade.php
 resources/views/components/server/**/*.blade.php
 resources/views/components/task-shell-defaults.blade.php
