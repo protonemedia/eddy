@@ -55,9 +55,6 @@ class ProvisionFreshServer extends Task implements HasCallbacks
 
     protected function onCustomCallback(TaskModel $task, Request $request)
     {
-        info('Custom callback', array_keys($request->all()));
-        info('Custom callback', $request->all());
-
         $request->validate([
             'provision_step_completed' => ['nullable', Enum::rule(ProvisionStep::class)],
             'software_installed' => ['nullable', Enum::rule(Software::class)],

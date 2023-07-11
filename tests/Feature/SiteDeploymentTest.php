@@ -19,7 +19,7 @@ class SiteDeploymentTest extends TestCase
 
         $site = SiteFactory::new()->create();
 
-        $this->postJson(route('site.deployWithToken', [
+        $this->postJson(route('site.deploy-with-token', [
             'site' => $site,
             'token' => $site->deploy_token,
         ]))->assertOk();
@@ -36,7 +36,7 @@ class SiteDeploymentTest extends TestCase
 
         $site = SiteFactory::new()->create();
 
-        $this->postJson(route('site.deployWithToken', [
+        $this->postJson(route('site.deploy-with-token', [
             'site' => $site,
             'token' => 'nope',
         ]))->assertForbidden();

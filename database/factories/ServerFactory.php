@@ -8,6 +8,7 @@ use App\Models\Team;
 use App\Provider;
 use App\Server\Software;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Server>
@@ -106,5 +107,14 @@ class ServerFactory extends Factory
                 'team_id' => $team->id,
             ];
         });
+    }
+
+    public function withDatabases(int $count = 3): self
+    {
+        return $this->has(
+            DatabaseFactory::new()->count($count)->state(new Sequence(
+                fn (Sequence $sequence) => ['name' => 'my_database'.$sequence->index],
+            ))
+        );
     }
 }

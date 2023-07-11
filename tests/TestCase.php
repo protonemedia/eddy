@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\UlidGenerator;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -23,6 +24,8 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
 
         Carbon::setTestNow(now());
+
+        UlidGenerator::createUlidsNormally();
 
         config([
             // Set the app key to a fixed value so that the signed URL is always the same

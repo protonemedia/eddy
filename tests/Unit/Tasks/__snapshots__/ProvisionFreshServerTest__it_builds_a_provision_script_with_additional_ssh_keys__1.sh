@@ -576,7 +576,7 @@ cat > /home/eddy/.config/composer/auth.json << 'EOF'
 }
 EOF
 
-chown eddy:eddy /home/eddy/.config/composer/auth.json
+chown -R eddy:eddy /home/eddy/.config/composer
 chmod 600 /home/eddy/.config/composer/auth.json
 
 httpPostSilently https://webhook.app/webhook/task/1/callback?signature=852aa54b2322ab416c8f5118b9cdf2f2bd623a23ba6f953e8d966ddf20ed649e '{"software_installed":"composer2"}'

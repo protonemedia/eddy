@@ -12,7 +12,9 @@
 
                 <x-description-list-item :label="__('IP Address')">
                     <span>{{ $server->public_ipv4 }}</span>
-                    <x-clipboard class="ml-1 h-5 w-5">{{ $server->public_ipv4 }}</x-clipboard>
+                    <x-clipboard class="ml-1 h-5 w-5">
+                        {{ $server->public_ipv4 }}
+                    </x-clipboard>
                 </x-description-list-item>
 
                 <x-description-list-item :label="__('Provider')">
@@ -28,7 +30,9 @@
                 <x-description-list-item :label="__('Installed Software')">
                     <ul>
                         @foreach ($server->installed_software as $software)
-                            <li>{{ \App\Server\Software::from($software)->getDisplayName() }}</li>
+                            <li>
+                                {{ \App\Server\Software::from($software)->getDisplayName() }}
+                            </li>
                         @endforeach
                     </ul>
                 </x-description-list-item>

@@ -5,9 +5,5 @@
         <x-splade-cell short_git_hash>
             <abbr title="{{ $item->git_hash }}">{{ $item->short_git_hash }}</abbr>
         </x-splade-cell>
-
-        <x-splade-cell status>
-            {{ $item->status->name }}
-        </x-splade-cell>
     </x-splade-table>
 </x-site-layout>

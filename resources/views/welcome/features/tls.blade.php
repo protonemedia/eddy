@@ -8,8 +8,7 @@
                 Eddy offers robust team management capabilities and advanced security features, such as two-factor authentication and
                 <b class="text-white">automatic security updates</b>
                 , to ensure servers remain secure and up-to-date. Users can also choose between automatic and custom SSL certificates, providing ultimate
-                flexibility. With its powerful and flexible server management and deployment capabilities, Eddy is the ideal solution for businesses looking to
-                optimize their operations.
+                flexibility.
             </p>
         </div>
     </div>

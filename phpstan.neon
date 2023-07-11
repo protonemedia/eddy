@@ -2,12 +2,10 @@ includes:
     - ./vendor/nunomaduro/larastan/extension.neon
 
 parameters:
-
+    checkOctaneCompatibility: true
+    level: 5
     paths:
         - app/
-
-    # Level 9 is the highest level
-    level: 5
 
 #   ignoreErrors:
 #       -

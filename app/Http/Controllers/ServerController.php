@@ -99,15 +99,15 @@ class ServerController extends Controller
         /** @var Credentials|null */
         $credentials = $customServer ? null : $this->user()->credentials()
             ->canBeUsedByTeam($this->team())
-            ->findOrFail($request->input('credentials_id'));
+            ->findOrFail($request->validated('credentials_id'));
 
         /** @var Server */
         $server = $this->team()->servers()->make([
-            'name' => $request->input('name'),
+            'name' => $request->validated('name'),
             'credentials_id' => $credentials?->id,
-            'region' => $request->input('region'),
-            'type' => $request->input('type'),
-            'image' => $request->input('image'),
+            'region' => $request->validated('region'),
+            'type' => $request->validated('type'),
+            'image' => $request->validated('image'),
         ]);
 
         $keyPair = $keyPairGenerator->ed25519();
@@ -121,13 +121,13 @@ class ServerController extends Controller
         $server->password = Str::password(symbols: false);
         $server->database_password = Str::password(symbols: false);
 
-        $server->public_ipv4 = $customServer ? $request->input('public_ipv4') : null;
+        $server->public_ipv4 = $customServer ? $request->validated('public_ipv4') : null;
         $server->provider = $customServer ? Provider::CustomServer : $credentials->provider;
         $server->created_by_user_id = $this->user()->id;
 
         $server->save();
         $server->dispatchCreateAndProvisionJobs(
-            SshKey::whereKey($request->input('ssh_keys'))->get(),
+            SshKey::whereKey($request->validated('ssh_keys'))->get(),
             $request->boolean('add_key_to_github') ? $this->user()->githubCredentials : null,
         );
 

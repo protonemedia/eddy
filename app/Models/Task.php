@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
 use ProtoneMedia\LaravelTaskRunner\ProcessOutput;
 
 /**
@@ -124,13 +125,9 @@ class Task extends Model
      */
     private function webhookUrl(string $name): string
     {
-        $host = rtrim(config('eddy.webhook_url') ?: config('app.url'), '/');
+        $name = Str::kebab($name);
 
-        return $host.URL::signedRoute(
-            name: 'webhook.task.'.$name,
-            parameters: ['task' => $this->id],
-            absolute: false
-        );
+        return URL::relativeSignedRoute('webhook.task.'.$name, ['task' => $this->id]);
     }
 
     public function timeoutUrl(): string

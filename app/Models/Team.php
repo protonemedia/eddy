@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
 use Laravel\Jetstream\Events\TeamUpdated;
@@ -43,6 +44,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(Server::class)->orderBy(
             (new Server)->qualifyColumn('name')
         );
+    }
+
+    public function backups(): HasManyThrough
+    {
+        return $this->hasManyThrough(Backup::class, Server::class);
     }
 
     public function activityLogs()

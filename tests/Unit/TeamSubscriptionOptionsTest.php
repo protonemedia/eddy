@@ -32,6 +32,7 @@ class TeamSubscriptionOptionsTest extends TestCase
                         'max_servers' => 3,
                         'max_sites_per_server' => 3,
                         'max_team_members' => 3,
+                        'has_backups' => true,
                     ],
                 ],
                 [
@@ -45,6 +46,7 @@ class TeamSubscriptionOptionsTest extends TestCase
                         'max_servers' => false,
                         'max_sites_per_server' => false,
                         'max_team_members' => false,
+                        'has_backups' => true,
                     ],
                 ],
             ],

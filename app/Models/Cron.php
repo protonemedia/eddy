@@ -69,4 +69,21 @@ class Cron extends Model
             ? "/root/{$this->server->working_directory}/cron-{$this->id}.log"
             : "/home/{$this->user}/{$this->server->working_directory}/cron-{$this->id}.log";
     }
+
+    /**
+     * Returns a set of options for the frequency select.
+     */
+    public static function predefinedFrequencyOptions(): array
+    {
+        return [
+            '* * * * *' => __('Every minute'),
+            '*/5 * * * *' => __('Every 5 minutes'),
+            '0 * * * *' => __('Hourly'),
+            '0 0 * * *' => __('Daily'),
+            '0 0 * * 0' => __('Weekly'),
+            '0 0 1 * *' => __('Monthly'),
+            '@reboot' => __('On Reboot'),
+            'custom' => __('Custom expression'),
+        ];
+    }
 }
