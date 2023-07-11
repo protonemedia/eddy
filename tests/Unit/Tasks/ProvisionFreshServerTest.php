@@ -3,6 +3,7 @@
 namespace Tests\Unit\Tasks;
 
 use App\Infrastructure\Entities\ServerStatus;
+use App\Jobs\InstallTaskCleanupCron;
 use App\Jobs\UpdateUserPublicKey;
 use App\Mail\ServerProvisioned;
 use App\Models\Server;
@@ -35,6 +36,10 @@ class ProvisionFreshServerTest extends TestCase
 
         $this->assertEquals(ServerStatus::Running, $server->fresh()->status);
         $this->assertEquals([22, 80, 443], $server->firewallRules->map->port->all());
+
+        Bus::assertDispatched(function (InstallTaskCleanupCron $job) use ($server) {
+            return $job->server->is($server);
+        });
 
         Bus::assertDispatched(function (UpdateUserPublicKey $job) use ($server) {
             return $job->server->is($server);
