@@ -3,15 +3,14 @@
 body,
 body *:not(html):not(style):not(br):not(tr):not(code) {
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     position: relative;
 }
 
 body {
     -webkit-text-size-adjust: none;
     background-color: #ffffff;
-    color: #64748B;
+    color: #64748b;
     height: 100%;
     line-height: 1.4;
     margin: 0;
@@ -38,7 +37,7 @@ a img {
 /* Typography */
 
 h1 {
-    color: #2B323B;
+    color: #2b323b;
     font-size: 18px;
     font-weight: bold;
     margin-top: 0;
@@ -80,7 +79,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #F6F7F9;
+    background-color: #f6f7f9;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -103,7 +102,7 @@ img {
 }
 
 .header a {
-    color: #2B323B;
+    color: #2b323b;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -123,9 +122,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #F6F7F9;
-    border-bottom: 1px solid #F6F7F9;
-    border-top: 1px solid #F6F7F9;
+    background-color: #f6f7f9;
+    border-bottom: 1px solid #f6f7f9;
+    border-top: 1px solid #f6f7f9;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -265,13 +264,13 @@ img {
 }
 
 .panel-content {
-    background-color: #F6F7F9;
-    color: #64748B;
+    background-color: #f6f7f9;
+    color: #64748b;
     padding: 16px;
 }
 
 .panel-content p {
-    color: #64748B;
+    color: #64748b;
 }
 
 .panel-item {
