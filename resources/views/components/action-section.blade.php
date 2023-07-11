@@ -20,7 +20,7 @@
     @endif
 
     <div class="mt-5 md:col-span-2 md:mt-0">
-        <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+        <div class="border border-gray-200 bg-white px-4 py-5 shadow-sm sm:rounded-md sm:p-6">
             <x-splade-modal max-width="{{ $attributes->get('modal-max-width', '2xl') }}" :close-explicitly="$attributes->get('modal-close-explicitly', true)">
                 @if (! $gridView && isset($title))
                     <div class="mb-4">

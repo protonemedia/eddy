@@ -6,6 +6,7 @@ use App\Jobs\InstallCron;
 use App\Jobs\UninstallCron;
 use App\Models\Cron;
 use App\Models\Server;
+use App\Rules\CronExpression;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -26,28 +27,11 @@ class CronController extends Controller
     }
 
     /**
-     * An array of default frequencies.
-     */
-    private function frequencyOptions(): array
-    {
-        return [
-            '* * * * *' => __('Every minute'),
-            '*/5 * * * *' => __('Every 5 minutes'),
-            '0 * * * *' => __('Hourly'),
-            '0 0 * * *' => __('Daily'),
-            '0 0 * * 0' => __('Weekly'),
-            '0 0 1 * *' => __('Monthly'),
-            '@reboot' => __('On Reboot'),
-            'custom' => __('Custom expression'),
-        ];
-    }
-
-    /**
      * Display a listing of the resource.
      */
     public function index(Server $server)
     {
-        $frequencies = $this->frequencyOptions();
+        $frequencies = Cron::predefinedFrequencyOptions();
 
         return view('crons.index', [
             'server' => $server,
@@ -69,7 +53,7 @@ class CronController extends Controller
     {
         return view('crons.create', [
             'server' => $server,
-            'frequencies' => $this->frequencyOptions(),
+            'frequencies' => Cron::predefinedFrequencyOptions(),
         ]);
     }
 
@@ -81,8 +65,8 @@ class CronController extends Controller
         $request->validate([
             'command' => ['required', 'string', 'max:255'],
             'user' => ['required', 'string', 'max:255', 'in:root,'.$server->username],
-            'frequency' => ['required', 'string', 'max:255', Rule::in(array_keys($this->frequencyOptions()))],
-            'custom_expression' => ['required_if:frequency,custom', 'nullable', 'string', 'max:255'],
+            'frequency' => ['required', 'string', 'max:255', Rule::in(array_keys(Cron::predefinedFrequencyOptions()))],
+            'custom_expression' => ['required_if:frequency,custom', 'nullable', 'string', 'max:255', new CronExpression],
         ]);
 
         $data = $request->only('command', 'user') + [
@@ -108,7 +92,7 @@ class CronController extends Controller
      */
     public function edit(Server $server, Cron $cron)
     {
-        $frequencyOptions = $this->frequencyOptions();
+        $frequencyOptions = Cron::predefinedFrequencyOptions();
 
         $cron->frequency = array_key_exists($cron->expression, Arr::except($frequencyOptions, 'custom')) ? $cron->expression : 'custom';
 
@@ -119,7 +103,7 @@ class CronController extends Controller
         return view('crons.edit', [
             'cron' => $cron,
             'server' => $server,
-            'frequencies' => $this->frequencyOptions(),
+            'frequencies' => Cron::predefinedFrequencyOptions(),
         ]);
     }
 
@@ -131,8 +115,8 @@ class CronController extends Controller
         $request->validate([
             'command' => ['required', 'string', 'max:255'],
             'user' => ['required', 'string', 'max:255', 'in:root,'.$server->username],
-            'frequency' => ['required', 'string', 'max:255', Rule::in(array_keys($this->frequencyOptions()))],
-            'custom_expression' => ['required_if:frequency,custom', 'nullable', 'string', 'max:255'],
+            'frequency' => ['required', 'string', 'max:255', Rule::in(array_keys(Cron::predefinedFrequencyOptions()))],
+            'custom_expression' => ['required_if:frequency,custom', 'nullable', 'string', 'max:255', new CronExpression],
         ]);
 
         $data = $request->only('command', 'user') + [

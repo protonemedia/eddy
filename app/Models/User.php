@@ -15,6 +15,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 
 /**
+ * @property Collection<int, Disk> $disks
  * @property Collection<int, Credentials> $credentials
  * @property Collection<int, SshKey> $sshKeys
  * @property Team $currentTeam
@@ -76,6 +77,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(SshKey::class)->orderBy(
             (new SshKey)->qualifyColumn('name')
+        );
+    }
+
+    public function disks()
+    {
+        return $this->hasMany(Disk::class)->orderBy(
+            (new Disk)->qualifyColumn('name')
         );
     }
 

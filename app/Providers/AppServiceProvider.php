@@ -2,34 +2,18 @@
 
 namespace App\Providers;
 
-use App\Http\Resources\CredentialsResource;
-use App\Http\Resources\CronResource;
-use App\Http\Resources\DaemonResource;
-use App\Http\Resources\DatabaseResource;
-use App\Http\Resources\DatabaseUserResource;
-use App\Http\Resources\FirewallRuleResource;
-use App\Http\Resources\ServerResource;
-use App\Http\Resources\SiteResource;
-use App\Http\Resources\TeamResource;
-use App\Http\Resources\UserResource;
-use App\Models\Credentials;
-use App\Models\Cron;
-use App\Models\Daemon;
-use App\Models\Database;
-use App\Models\DatabaseUser;
-use App\Models\Deployment;
-use App\Models\FirewallRule;
-use App\Models\Server;
-use App\Models\Site;
-use App\Models\Team;
-use App\Models\User;
+use App\Http\Resources;
+use App\Models;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
@@ -86,6 +70,15 @@ class AppServiceProvider extends ServiceProvider
             return $request->routeIs('servers.files.update');
         });
 
+        Arr::macro('explodePaths', function ($value = null) {
+            return Collection::make(explode(PHP_EOL, $value ?? ''))
+                ->map(fn ($item) => rtrim(trim($item), '/'))
+                ->filter(fn ($item) => $item !== '')
+                ->unique()
+                ->values()
+                ->all();
+        });
+
         Str::macro('generateWordpressKey', function ($length = 64) {
             $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
             $max = strlen($chars) - 1;
@@ -97,6 +90,12 @@ class AppServiceProvider extends ServiceProvider
             }
 
             return $key;
+        });
+
+        URL::macro('relativeSignedRoute', function (string $name, mixed $parameters = []): string {
+            $host = rtrim(config('eddy.webhook_url') ?: config('app.url'), '/');
+
+            return $host.URL::signedRoute($name, $parameters, absolute: false);
         });
     }
 
@@ -136,16 +135,19 @@ class AppServiceProvider extends ServiceProvider
 
         // Enforce a morph map instead of making it optional.
         Relation::enforceMorphMap([
-            'cron' => Cron::class,
-            'daemon' => Daemon::class,
-            'database_user' => DatabaseUser::class,
-            'database' => Database::class,
-            'deployment' => Deployment::class,
-            'firewall_rule' => FirewallRule::class,
-            'server' => Server::class,
-            'site' => Site::class,
-            'team' => Team::class,
-            'user' => User::class,
+            'backup_job' => Models\BackupJob::class,
+            'backup' => Models\Backup::class,
+            'cron' => Models\Cron::class,
+            'daemon' => Models\Daemon::class,
+            'database_user' => Models\DatabaseUser::class,
+            'database' => Models\Database::class,
+            'deployment' => Models\Deployment::class,
+            'disk' => Models\Disk::class,
+            'firewall_rule' => Models\FirewallRule::class,
+            'server' => Models\Server::class,
+            'site' => Models\Site::class,
+            'team' => Models\Team::class,
+            'user' => Models\User::class,
         ]);
 
         DB::listen(function ($query) {
@@ -163,16 +165,18 @@ class AppServiceProvider extends ServiceProvider
         Select::defaultSelectFirstRemoteOption();
 
         Splade::requireTransformer()->transformUsing([
-            Credentials::class => CredentialsResource::class,
-            Cron::class => CronResource::class,
-            Daemon::class => DaemonResource::class,
-            Database::class => DatabaseResource::class,
-            DatabaseUser::class => DatabaseUserResource::class,
-            FirewallRule::class => FirewallRuleResource::class,
-            Server::class => ServerResource::class,
-            Site::class => SiteResource::class,
-            Team::class => TeamResource::class,
-            User::class => UserResource::class,
+            Models\Backup::class => Resources\BackupResource::class,
+            Models\Credentials::class => Resources\CredentialsResource::class,
+            Models\Cron::class => Resources\CronResource::class,
+            Models\Daemon::class => Resources\DaemonResource::class,
+            Models\Database::class => Resources\DatabaseResource::class,
+            Models\DatabaseUser::class => Resources\DatabaseUserResource::class,
+            Models\Disk::class => Resources\DiskResource::class,
+            Models\FirewallRule::class => Resources\FirewallRuleResource::class,
+            Models\Server::class => Resources\ServerResource::class,
+            Models\Site::class => Resources\SiteResource::class,
+            Models\Team::class => Resources\TeamResource::class,
+            Models\User::class => Resources\UserResource::class,
         ]);
 
         Splade::defaultToast(function (SpladeToast $toast) {

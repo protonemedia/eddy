@@ -4,54 +4,45 @@
     <nav class="border-b border-gray-100 bg-white">
         <!-- Primary Navigation Menu -->
         <div class="mx-auto max-w-7xl px-4 sm:px-3 md:px-6 lg:px-8">
-            <div class="flex h-16 justify-between">
-                <div class="flex">
+            <div class="flex flex-wrap justify-between">
+                <div class="order-1 flex h-16">
                     <!-- Logo -->
                     <div class="flex shrink-0 items-center">
                         <Link href="{{ route('dashboard') }}">
                             <x-application-mark class="block h-9 w-auto" />
                         </Link>
                     </div>
-
-                    <!-- Navigation Links -->
-                    <div class="hidden space-x-4 sm:-my-px sm:ml-10 sm:flex md:space-x-5 lg:space-x-8">
-                        <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers*')">
-                            {{ __('Servers') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('credentials.index')" :active="request()->routeIs('credentials*')">
-                            {{ __('Credentials') }}
-                        </x-nav-link>
-
-                        <x-nav-link :href="route('ssh-keys.index')" :active="request()->routeIs('ssh-keys*')">
-                            {{ __('SSH Keys') }}
-                        </x-nav-link>
-                    </div>
                 </div>
 
-                <div class="ml-4 hidden sm:flex sm:items-center md:ml-6">
-                    <div class="relative ml-3">
+                <nav class="order-3 hidden sm:flex sm:w-screen sm:space-x-5 sm:border-t sm:py-3 md:order-2 md:w-auto md:border-t-0 md:py-2" aria-label="Global">
+                    <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers*')">
+                        {{ __('Servers') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('credentials.index')" :active="request()->routeIs('credentials*')">
+                        {{ __('Credentials') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('disks.index')" :active="request()->routeIs('disks*')">
+                        {{ __('Backup Disks') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('ssh-keys.index')" :active="request()->routeIs('ssh-keys*')">
+                        {{ __('SSH Keys') }}
+                    </x-nav-link>
+                </nav>
+
+                <div class="order-2 hidden sm:flex sm:items-center md:order-3 md:ml-6">
+                    <div class="relative ml-2">
                         @if (\Laravel\Jetstream\Jetstream::hasTeamFeatures())
                             <x-splade-dropdown>
                                 <x-slot:trigger>
                                     <span class="inline-flex rounded-md">
                                         <button
                                             type="button"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:bg-gray-50 focus:outline-none active:bg-gray-50"
+                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-2 py-2 text-sm font-medium leading-4 text-indigo-900 transition duration-150 ease-in-out hover:bg-indigo-50 focus:bg-indigo-50 focus:outline-none active:bg-indigo-50"
                                         >
-                                            <span class="hidden lg:inline">{{ auth()->user()->currentTeam->name }}</span>
-                                            <span class="lg:hidden">{{ __('Team') }}</span>
-
-                                            <svg
-                                                class="-mr-0.5 ml-2 h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor"
-                                            >
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                                            </svg>
+                                            @svg('heroicon-o-building-office', 'h-6 w-6')
                                         </button>
                                     </span>
                                 </x-slot>
@@ -67,7 +58,8 @@
                                         {{ __('Team Settings') }}
                                     </x-dropdown-link>
 
-                                    @if (config('eddy.subscriptions_enabled') && auth()->user()->ownsTeam(auth()->user()->currentTeam))
+                                    @if (config('eddy.subscriptions_enabled') &&
+                                         auth()->user()->ownsTeam(auth()->user()->currentTeam))
                                         <x-dropdown-link href="/billing" away>
                                             {{ __('Manage Subscription') }}
                                         </x-dropdown-link>
@@ -118,7 +110,7 @@
                     </div>
 
                     <!-- Settings Dropdown -->
-                    <div class="relative ml-3">
+                    <div class="relative ml-2">
                         <x-splade-dropdown>
                             <x-slot:trigger>
                                 @if (\Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -133,21 +125,9 @@
                                     <span class="inline-flex rounded-md">
                                         <button
                                             type="button"
-                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:bg-gray-50 focus:outline-none active:bg-gray-50"
+                                            class="inline-flex items-center rounded-md border border-transparent bg-white px-2 py-2 text-sm font-medium leading-4 text-indigo-900 transition duration-150 ease-in-out hover:bg-indigo-50 focus:bg-indigo-50 focus:outline-none active:bg-indigo-50"
                                         >
-                                            <span class="hidden md:inline">{{ auth()->user()->name }}</span>
-                                            <span class="md:hidden">{{ auth()->user()->initials }}</span>
-
-                                            <svg
-                                                class="-mr-0.5 ml-2 h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor"
-                                            >
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                                            </svg>
+                                            @svg('heroicon-o-user-circle', 'h-6 w-6')
                                         </button>
                                     </span>
                                 @endif
@@ -183,21 +163,21 @@
                 </div>
 
                 <!-- Hamburger -->
-                <div class="-mr-2 flex items-center sm:hidden">
+                <div class="order-4 -mr-2 flex items-center sm:hidden">
                     <button
                         class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
                         @click="mobileNavigation.open = ! mobileNavigation.open"
                     >
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path
-                                :class="{'hidden': mobileNavigation.open, 'inline-flex': ! mobileNavigation.open }"
+                                :class="{ 'hidden': mobileNavigation.open, 'inline-flex': !mobileNavigation.open }"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"
                             />
                             <path
-                                :class="{'hidden': ! mobileNavigation.open, 'inline-flex': mobileNavigation.open }"
+                                :class="{ 'hidden': !mobileNavigation.open, 'inline-flex': mobileNavigation.open }"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
@@ -210,7 +190,7 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{'block': mobileNavigation.open, 'hidden': ! mobileNavigation.open}" class="sm:hidden">
+        <div :class="{ 'block': mobileNavigation.open, 'hidden': !mobileNavigation.open }" class="sm:hidden">
             <div class="space-y-1 pb-3 pt-2">
                 <x-responsive-nav-link :href="route('servers.index')" :active="request()->routeIs('servers*')">
                     {{ __('Servers') }}
@@ -218,6 +198,10 @@
 
                 <x-responsive-nav-link :href="route('credentials.index')" :active="request()->routeIs('credentials*')">
                     {{ __('Credentials') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('disks.index')" :active="request()->routeIs('disks*')">
+                    {{ __('Backup Disks') }}
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('ssh-keys.index')" :active="request()->routeIs('ssh-keys*')">
@@ -275,7 +259,8 @@
                             {{ __('Team Settings') }}
                         </x-responsive-nav-link>
 
-                        @if (config('eddy.subscriptions_enabled') && auth()->user()->ownsTeam(auth()->user()->currentTeam))
+                        @if (config('eddy.subscriptions_enabled') &&
+                             auth()->user()->ownsTeam(auth()->user()->currentTeam))
                             <x-responsive-nav-link away href="/billing">
                                 {{ __('Manage Subscription') }}
                             </x-responsive-nav-link>

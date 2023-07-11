@@ -21,5 +21,5 @@ cat > /home/{!! $server->username !!}/.config/composer/auth.json << 'EOF'
 }
 EOF
 
-chown {!! $server->username !!}:{!! $server->username !!} /home/{!! $server->username !!}/.config/composer/auth.json
+chown -R {!! $server->username !!}:{!! $server->username !!} /home/{!! $server->username !!}/.config/composer
 chmod 600 /home/{!! $server->username !!}/.config/composer/auth.json

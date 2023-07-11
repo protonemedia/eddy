@@ -116,6 +116,7 @@ return [
                         'max_sites_per_server' => 10,
                         'max_deployments_per_site' => 5,
                         'max_team_members' => 1,
+                        'has_backups' => false,
                     ],
                 ],
 
@@ -138,6 +139,7 @@ return [
                         'max_sites_per_server' => false,
                         'max_deployments_per_site' => 15,
                         'max_team_members' => 5,
+                        'has_backups' => true,
                     ],
                 ],
 
@@ -161,6 +163,7 @@ return [
                         'max_sites_per_server' => false,
                         'max_deployments_per_site' => false,
                         'max_team_members' => false,
+                        'has_backups' => true,
                     ],
                 ],
             ],

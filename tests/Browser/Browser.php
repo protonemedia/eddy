@@ -40,4 +40,12 @@ class Browser extends BaseBrowser
             ->waitFor('#headlessui-portal-root')
             ->waitFor('div[data-headlessui-state="open"]');
     }
+
+    /**
+     * Clear and type a value into a field.
+     */
+    public function clearAndType(string $field, string $value): self
+    {
+        return $this->clear($field)->pause(150)->type($field, $value);
+    }
 }

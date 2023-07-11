@@ -1,0 +1,5 @@
+host: ftp.example.com
+username: username
+password: password
+driver: ftp
+throw: true

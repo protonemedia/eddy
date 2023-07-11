@@ -176,13 +176,7 @@ class Server extends Model
      */
     public function provisionScriptUrl(): string
     {
-        $host = rtrim(config('eddy.webhook_url') ?: config('app.url'), '/');
-
-        return $host.URL::signedRoute(
-            name: 'servers.provisionScript',
-            parameters: ['server' => $this],
-            absolute: false
-        );
+        return URL::relativeSignedRoute('servers.provision-script', ['server' => $this]);
     }
 
     /**
@@ -351,6 +345,12 @@ class Server extends Model
     public function sites(): HasMany
     {
         return $this->hasMany(Site::class);
+    }
+
+    public function backups(): HasMany
+    {
+        return $this->hasMany(Backup::class)
+            ->orderBy((new Backup)->qualifyColumn('name'));
     }
 
     public function crons(): HasMany

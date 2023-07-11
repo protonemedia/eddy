@@ -43,6 +43,7 @@
                             'Deployment log limited to 5 releases per site',
                             'Unlimited cron, daemons, firewall rules, etc.',
                             'No team support',
+                            'No backup support',
                             'You support the development of Eddy and Splade!',
                         ]
                     "
@@ -58,7 +59,8 @@
                             '10 Servers',
                             'Unlimited Sites per Server',
                             'Unlimited cron, daemons, firewall rules, etc.',
-                            'Deployment log limited to 15 releases per site',
+                            'Unlimited database and file backups',
+                            'Deployment log limited to 15 per site',
                             'Up to 5 team members',
                             'You support the development of Eddy and Splade!',
                         ]
@@ -75,6 +77,7 @@
                             'Unlimited Sites per Server',
                             'Unlimited Deployment logs',
                             'Unlimited cron, daemons, firewall rules, etc.',
+                            'Unlimited database and file backups',
                             'Unlimited team members',
                             'Access to upcoming features',
                             'You support the development of Eddy and Splade!',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deployment;
+use App\Models\DeploymentStatus;
 use App\Models\Server;
 use App\Models\Site;
 use ProtoneMedia\Splade\Facades\Toast;
@@ -43,7 +44,7 @@ class SiteDeploymentController extends Controller
                 ->column('updated_at', __('Deployed at'), sortable: true)
                 ->column('user.name', __('User'), as: fn ($name) => $name ?: __('Via Deploy URL'))
                 ->column('short_git_hash', __('Git Hash'))
-                ->column('status', __('Status'), alignment: 'right')
+                ->column('status', __('Status'), as: fn (DeploymentStatus $status) => $status->name, alignment: 'right')
                 ->withGlobalSearch(__('Search Git Hash...'), ['git_hash'])
                 ->rowLink(fn (Deployment $deployment) => route('servers.sites.deployments.show', [$server, $site, $deployment]))
                 ->defaultSort('-updated_at')

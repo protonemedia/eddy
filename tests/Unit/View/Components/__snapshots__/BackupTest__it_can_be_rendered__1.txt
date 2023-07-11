@@ -1,0 +1,4 @@
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+0 0 * * * eddy (curl -X POST --max-time 15 https://webhook.app/backup/1/token?signature=3858ee568dcc5d40976511e7e738bc9cda0ce6a7b4b2c481b2de66d7cf709f38) 2>&1

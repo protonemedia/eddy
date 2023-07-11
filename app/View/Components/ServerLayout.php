@@ -38,6 +38,7 @@ class ServerLayout extends Component
                 new NavigationItem(__('Cronjobs'), 'servers.crons', 'heroicon-o-clock'),
                 new NavigationItem(__('Daemons'), 'servers.daemons', 'heroicon-o-arrow-path'),
                 new NavigationItem(__('Firewall Rules'), 'servers.firewall-rules', 'heroicon-o-shield-check'),
+                new NavigationItem(__('Backups'), 'servers.backups', 'heroicon-o-rectangle-stack'),
                 new NavigationItem(__('Software'), 'servers.software', 'heroicon-o-code-bracket'),
                 new NavigationItem(__('Files'), 'servers.files', 'heroicon-o-document-text'),
                 new NavigationItem(__('Logs'), 'servers.logs', 'heroicon-o-book-open'),

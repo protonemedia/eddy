@@ -1,0 +1,5 @@
+host: sftp.example.com
+username: username
+privateKey: /home/eddy/.ssh/id_rsa.pub
+driver: sftp
+throw: true

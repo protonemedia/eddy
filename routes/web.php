@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\AddSshKeyToServerController;
+use App\Http\Controllers\BackupController;
+use App\Http\Controllers\BackupJobController;
+use App\Http\Controllers\BackupJobOutputController;
 use App\Http\Controllers\CredentialsController;
 use App\Http\Controllers\CronController;
 use App\Http\Controllers\DaemonController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\DatabaseUserController;
+use App\Http\Controllers\DiskController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FirewallRuleController;
 use App\Http\Controllers\GithubController;
@@ -38,13 +42,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('/deploy/{site}/{token}', [SiteDeploymentController::class, 'deployWithToken'])->name('site.deployWithToken');
+Route::any('/deploy/{site}/{token}', [SiteDeploymentController::class, 'deployWithToken'])->name('site.deploy-with-token');
+Route::post('/backup/{backup}/{token}', [BackupJobController::class, 'store'])->name('backup-job.store');
 
 Route::middleware('signed:relative')->group(function () {
-    Route::get('/servers/{server}/provision-script', ServerProvisionScriptController::class)->name('servers.provisionScript');
-    Route::post('/webhook/task/{task}/timeout', [TaskWebhookController::class, 'markAsTimedOut'])->name('webhook.task.markAsTimedOut');
-    Route::post('/webhook/task/{task}/failed', [TaskWebhookController::class, 'markAsFailed'])->name('webhook.task.markAsFailed');
-    Route::post('/webhook/task/{task}/finished', [TaskWebhookController::class, 'markAsFinished'])->name('webhook.task.markAsFinished');
+    // Backups...
+    Route::get('/backup-job/{backup_job}', [BackupJobController::class, 'show'])->name('backup-job.show');
+    Route::patch('/backup-job/{backup_job}', [BackupJobController::class, 'update'])->name('backup-job.update');
+
+    // Provision Script for Custom Servers...
+    Route::get('/servers/{server}/provision-script', ServerProvisionScriptController::class)->name('servers.provision-script');
+
+    // Tasks...
+    Route::post('/webhook/task/{task}/timeout', [TaskWebhookController::class, 'markAsTimedOut'])->name('webhook.task.mark-as-timed-out');
+    Route::post('/webhook/task/{task}/failed', [TaskWebhookController::class, 'markAsFailed'])->name('webhook.task.mark-as-failed');
+    Route::post('/webhook/task/{task}/finished', [TaskWebhookController::class, 'markAsFinished'])->name('webhook.task.mark-as-finished');
     Route::post('/webhook/task/{task}/callback', [TaskWebhookController::class, 'callback'])->name('webhook.task.callback');
 });
 
@@ -75,6 +87,8 @@ Route::middleware('splade')->group(function () use ($authMiddleware) {
         Route::resource('servers', ServerController::class);
         Route::resource('ssh-keys', SshKeyController::class)->only(['index', 'create', 'store', 'destroy']);
 
+        Route::resource('disks', DiskController::class)->except('show');
+
         Route::middleware('can:manage,ssh_key')->group(function () {
             Route::get('ssh-keys/{ssh_key}/servers/add', [AddSshKeyToServerController::class, 'create'])->name('ssh-keys.servers.add-form');
             Route::post('ssh-keys/{ssh_key}/servers/add', [AddSshKeyToServerController::class, 'store'])->name('ssh-keys.servers.add');
@@ -89,6 +103,11 @@ Route::middleware('splade')->group(function () use ($authMiddleware) {
         });
 
         Route::middleware('can:manage,server')->group(function () {
+            Route::resource('servers.backups', BackupController::class);
+            Route::get('servers/{server}/backup-job/{backup_job}', BackupJobOutputController::class)
+                ->name('servers.backup-jobs.show')
+                ->middleware('can:view,backup_job');
+
             Route::resource('servers.crons', CronController::class);
             Route::resource('servers.daemons', DaemonController::class);
             Route::resource('servers.databases', DatabaseController::class)->except(['show', 'update']);

@@ -70,7 +70,7 @@
 
                 <x-description-list-item :label="__('Deploy URL')">
                     <span class="break-all pr-4">
-                        {{ route('site.deployWithToken', [$site, $site->deploy_token]) }}
+                        {{ route('site.deploy-with-token', [$site, $site->deploy_token]) }}
                     </span>
 
                     <Link

@@ -24,7 +24,9 @@
                 >
                     Dashboard
                 </Link>
-            @else
+            @endauth
+
+            @guest
                 <Link
                     href="{{ route('login') }}"
                     class="rounded-md border border-transparent bg-indigo-500 px-4 py-2 font-bold text-white shadow-sm hover:bg-indigo-700 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -37,7 +39,7 @@
                 >
                     Register
                 </Link>
-            @endauth
+            @endguest
         </div>
     </div>
 
@@ -49,6 +51,7 @@
 @include('welcome.features.open-source')
 @include('welcome.features.editor')
 @include('welcome.features.tls')
+@include('welcome.features.backups')
 @include('welcome.pricing')
 
 <div class="relative flex flex-col items-center justify-center bg-gradient-to-t from-gray-900 to-gray-800 px-8 selection:bg-red-500 selection:text-white">

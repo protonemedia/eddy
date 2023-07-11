@@ -104,4 +104,13 @@ class TeamSubscriptionOptions
     {
         return $this->limitNotReached('max_team_members', $this->countTeamMembers());
     }
+
+    public function hasBackups(): bool
+    {
+        if (! $this->mustVerifySubscription()) {
+            return true;
+        }
+
+        return $this->planOptions()['has_backups'] ?? false;
+    }
 }

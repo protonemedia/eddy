@@ -1,0 +1,5 @@
+host: sftp.example.com
+username: username
+password: password
+driver: sftp
+throw: true
