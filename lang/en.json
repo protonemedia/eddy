@@ -221,6 +221,7 @@
     "Enhance SSH security by disabling password authentication and root login": "Enhance SSH security by disabling password authentication and root login",
     "Ensure your account is using a long, random password to stay secure.": "Ensure your account is using a long, random password to stay secure.",
     "Environment file": "Environment file",
+    "Error": "Error",
     "Every 5 minutes": "Every 5 minutes",
     "Every minute": "Every minute",
     "Exclude Directories and Files": "Exclude Directories and Files",
