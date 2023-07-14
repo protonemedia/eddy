@@ -1,8 +1,12 @@
 # Eddy Server Management 🛡️
 
+[![run-tests](https://github.com/protonemedia/eddy-server-management/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/protonemedia/eddy-server-management/actions/workflows/run-tests.yml)
+[![Splade Discord Server](https://dcbadge.vercel.app/api/server/qGJ4MkMQWm?style=flat&theme=default-inverted)](https://discord.gg/qGJ4MkMQWm)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/pascalbaljet)](https://github.com/sponsors/pascalbaljet)
+
 Eddy is an open-source deployment tool built with [Splade](https://splade.dev) that allows users to deploy PHP applications with zero downtime using the Caddy web server.
 
-Eddy supports easy server provisioning using Ubuntu 22.04 LTS and can start servers quickly from popular providers such as DigitalOcean, Hetzner, or any custom provider. Eddy also features automatic SSL certificate renewal, automatic security updates, and the ability to manage cron jobs, daemon processes, and firewall rules. Additionally, users can manage MySQL databases and run multiple PHP versions on a single server.
+Eddy supports easy server provisioning using Ubuntu 22.04 LTS and can start servers quickly from popular providers such as DigitalOcean, Hetzner, or any custom provider. Eddy also features automatic SSL certificate renewal, automatic security updates, and the ability to manage cron jobs, daemon processes, and firewall rules. It supports Database and File backups to S3, FTP, and SFTP destinations with custom schedules, automatic cleanup, and notifications. Additionally, users can manage MySQL databases and run multiple PHP versions on a single server.
 
 [Eddy Server Management](https://eddy.management) is a [Protone Media](https://protone.media) product.
 
@@ -17,6 +21,7 @@ Eddy supports easy server provisioning using Ubuntu 22.04 LTS and can start serv
 - Run multiple PHP versions on a single server.
 - Easily manage your MySQL databases and users.
 - Manage cron jobs, daemon processes, and firewall rules.
+- Database and File backups to S3, FTP, and SFTP destinations.
 - Customize your deployment process with support for custom deployment scripts.
 - Edit configuration files directly from the web interface.
 - Quickly access both your server and application logs directly from the web interface.
