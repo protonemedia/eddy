@@ -27,7 +27,9 @@ cp .env.example .env
 php artisan key:generate --force
 ```
 
-Also in the `.env` file, set the cache and queue driver to `redis`, set the broadcast driver to `pusher`, and fill in the credentials for your Pusher account. After that, everything is ready to compile the assets and run the migrations:
+Also in the `.env` file, set the cache and queue driver to `redis`, set the broadcast driver to `pusher`, and fill in the credentials for your Pusher account. Pusher is used to broadcast events to the app, like when a server is created or deleted so the frontend can update in real-time (handled by [Splade](https://splade.dev/docs/x-event)).
+
+After that, everything is ready to compile the assets and run the migrations:
 
 ```bash
 npm run build
