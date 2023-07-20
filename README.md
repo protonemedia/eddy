@@ -3,6 +3,7 @@
 [![run-tests](https://github.com/protonemedia/eddy-server-management/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/protonemedia/eddy-server-management/actions/workflows/run-tests.yml)
 [![Splade Discord Server](https://dcbadge.vercel.app/api/server/qGJ4MkMQWm?style=flat&theme=default-inverted)](https://discord.gg/qGJ4MkMQWm)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/pascalbaljet)](https://github.com/sponsors/pascalbaljet)
+[![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/4467-shield.svg)](https://madewithlaravel.com/p/eddy-server-management/shield-link)
 
 Eddy is an open-source deployment tool built with [Splade](https://splade.dev) that allows users to deploy PHP applications with zero downtime using the Caddy web server.
 
