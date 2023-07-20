@@ -184,7 +184,7 @@ class Server extends Model
      */
     public function provisionCommand(): HtmlString
     {
-        return new HtmlString("mkdir -p /root/.ssh && touch /root/.ssh/authorized_keys && chmod -R go-rwx /root/.ssh/ && wget --no-verbose -O - {$this->provisionScriptUrl()} | bash");
+        return new HtmlString("mkdir -p /root/.ssh && touch /root/.ssh/authorized_keys && chmod go-rwx /root/.ssh/ && chmod go-rwx /root/.ssh/authorized_keys && wget --no-verbose -O - {$this->provisionScriptUrl()} | bash");
     }
 
     /**
