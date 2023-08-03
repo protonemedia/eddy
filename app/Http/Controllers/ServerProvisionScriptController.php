@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Server;
 use App\Provider;
-use App\Tasks\AuthorizePublicKey;
+use App\Tasks\AuthorizeManagementRootKey;
 
 /**
  * @codeCoverageIgnore Handled by Dusk tests.
@@ -26,7 +26,7 @@ class ServerProvisionScriptController extends Controller
             return '';
         }
 
-        $task = new AuthorizePublicKey($server, $server->public_key, true);
+        $task = new AuthorizeManagementRootKey($server);
 
         return $task->getScript();
     }
