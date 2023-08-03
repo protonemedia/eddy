@@ -16,15 +16,15 @@ class ProviderFactory
 
     public function forServer(Server $server): ServerProvider
     {
+        if ($server->provider === Provider::Vagrant) {
+            return new Vagrant($this->processRunner, config('services.vagrant.path'));
+        }
+
         if ($server->credentials) {
             return $this->forCredentials($server->credentials);
         }
 
-        return match ($server->provider) {
-            Provider::Vagrant => new Vagrant($this->processRunner, config('services.vagrant.path')),
-
-            default => throw new Exception('Invalid provider')
-        };
+        throw new Exception('No credentials found');
     }
 
     public function forCredentials(Credentials $credentials): mixed
