@@ -20,13 +20,13 @@ return [
 
     'title_prefix' => '',
     'title_separator' => ' | ',
-    'title_suffix' => 'Eddy',
+    'title_suffix' => 'Eddy Server Management',
 
     'auto_canonical_link' => true,
 
     'open_graph' => [
         'auto_fill' => true,
-        'image' => 'https://eddy.management/card.png',
+        'image' => 'https://eddy.management/card.jpg',
         'site_name' => null,
         'title' => null,
         'type' => 'WebPage',
@@ -37,7 +37,7 @@ return [
         'auto_fill' => true,
         'card' => 'summary_large_image',
         'description' => null,
-        'image' => 'https://eddy.management/card.png',
+        'image' => 'https://eddy.management/card.jpg',
         'site' => '@pascalbaljet',
         'title' => null,
     ],
