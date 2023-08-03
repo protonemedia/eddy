@@ -90,12 +90,15 @@ class ServerFactory extends Factory
     public function provisioned()
     {
         return $this->state(function (array $attributes) {
+            $keyPair = Dummies::ed25519KeyPair();
+
             return [
                 'provider_id' => 1,
                 'public_ipv4' => '192.168.60.61',
                 'status' => ServerStatus::Running,
                 'installed_software' => Software::defaultStack(),
                 'provisioned_at' => now(),
+                'user_public_key' => $keyPair->publicKey,
             ];
         });
     }

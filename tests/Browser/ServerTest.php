@@ -3,7 +3,6 @@
 namespace Tests\Browser;
 
 use App\Infrastructure\Entities\ServerStatus;
-use App\Jobs\AddServerSshKeyToGithub;
 use App\Jobs\CreateServerOnInfrastructure;
 use App\Jobs\DeleteServerFromInfrastructure;
 use App\Jobs\ProvisionServer;
@@ -100,7 +99,7 @@ class ServerTest extends DuskTestCase
     }
 
     /** @test */
-    public function it_can_create_a_new_server_with_a_custom_provider()
+    public function it_can_create_a_new_server_with_a_custom_provider_and_add_ssh_key_to_github()
     {
         $this->browse(function (Browser $browser) {
             TaskRunner::dontFake(GenerateEd25519KeyPair::class);
@@ -109,6 +108,8 @@ class ServerTest extends DuskTestCase
             $user = UserFactory::new()->withPersonalTeam()->create();
 
             CredentialsFactory::new()->forUser($user)->vagrant()->create();
+
+            $github = CredentialsFactory::new()->forUser($user)->github()->create();
 
             $this->assertEquals(0, $user->currentTeam->servers()->count());
 
@@ -120,6 +121,7 @@ class ServerTest extends DuskTestCase
                 ->check('custom_server')
                 ->type('name', 'My Server')
                 ->type('public_ipv4', '8.8.8.8')
+                ->check('add_key_to_github')
                 ->press('Submit')
                 ->waitForText('The server is currently being created');
 
@@ -146,55 +148,12 @@ class ServerTest extends DuskTestCase
             $this->assertNotNull($server->password);
             $this->assertNotNull($server->database_password);
             $this->assertEquals($user->getKey(), $server->created_by_user_id);
+            $this->assertEquals($github->getKey(), $server->github_credentials_id);
 
             Bus::assertChained([
                 new CreateServerOnInfrastructure($server),
                 new WaitForServerToConnect($server),
                 new ProvisionServer($server, Collection::make()),
-            ]);
-        });
-    }
-
-    /** @test */
-    public function it_can_create_a_new_server_and_have_the_ssh_key_added_to_github()
-    {
-        $this->browse(function (Browser $browser) {
-            TaskRunner::dontFake(GenerateEd25519KeyPair::class);
-
-            /** @var User */
-            $user = UserFactory::new()->withPersonalTeam()->create();
-
-            /** @var Credentials */
-            $credentials = CredentialsFactory::new()->forUser($user)->vagrant()->create();
-
-            /** @var Credentials */
-            $github = CredentialsFactory::new()->forUser($user)->github()->create();
-
-            $browser
-                ->loginAs($user)
-                ->visit(route('servers.index'))
-                ->clickLink('New Server')
-                ->waitForModal()
-                ->type('name', 'My Server')
-                ->select('credentials_id', $credentials->getKey())
-                ->waitUsing(10, 100, function () use ($browser) {
-                    return $browser->resolver->findOrFail('[data-value="localhost"]')->isDisplayed()
-                        && $browser->resolver->findOrFail('[data-value="ubuntu-2204"]')->isDisplayed()
-                        && $browser->resolver->findOrFail('[data-value="ubuntu-2204-1"]')->isDisplayed();
-                })
-                ->check('add_key_to_github')
-                ->press('Submit')
-                ->waitForText('The server is currently being created');
-
-            $this->assertEquals(1, $user->currentTeam->servers()->count());
-
-            $server = $user->currentTeam->servers()->first();
-
-            Bus::assertChained([
-                new CreateServerOnInfrastructure($server),
-                new WaitForServerToConnect($server),
-                new ProvisionServer($server),
-                new AddServerSshKeyToGithub($server, $github),
             ]);
         });
     }

@@ -18,13 +18,13 @@ class AddServerSshKeyToGithubTest extends TestCase
     /** @test */
     public function it_adds_the_public_key()
     {
-        $server = ServerFactory::new()->create();
+        $server = ServerFactory::new()->provisioned()->create();
         $credentials = CredentialsFactory::new()->forUser($server->createdByUser)->github()->create();
 
         $github = Mockery::mock(Github::class);
         $github->shouldReceive('addKey')->once()->withArgs([
             "{$server->name} (added by ".config('app.name').')',
-            $server->public_key,
+            $server->user_public_key,
         ]);
 
         $providerFactory = Mockery::mock(ProviderFactory::class);

@@ -37,7 +37,7 @@ class AddServerSshKeyToGithub implements ShouldQueue
 
         $github->addKey(
             "{$this->server->name} (added by {$appName})",
-            $this->server->public_key
+            $this->server->user_public_key
         );
     }
 }

@@ -124,11 +124,11 @@ class ServerController extends Controller
         $server->public_ipv4 = $customServer ? $request->validated('public_ipv4') : null;
         $server->provider = $customServer ? Provider::CustomServer : $credentials->provider;
         $server->created_by_user_id = $this->user()->id;
+        $server->github_credentials_id = $request->boolean('add_key_to_github') ? $this->user()->githubCredentials?->id : null;
 
         $server->save();
         $server->dispatchCreateAndProvisionJobs(
             SshKey::whereKey($request->validated('ssh_keys'))->get(),
-            $request->boolean('add_key_to_github') ? $this->user()->githubCredentials : null,
         );
 
         $this->logActivity(__("Created server ':server'", ['server' => $server->name]), $server);

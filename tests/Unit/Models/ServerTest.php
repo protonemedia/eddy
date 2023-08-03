@@ -2,7 +2,6 @@
 
 use App\Infrastructure\Entities\ServerStatus;
 use App\Infrastructure\Entities\ServerType;
-use App\Jobs\AddServerSshKeyToGithub;
 use App\Jobs\CreateServerOnInfrastructure;
 use App\Jobs\ProvisionServer;
 use App\Jobs\WaitForServerToConnect;
@@ -10,7 +9,6 @@ use App\Models\Server;
 use App\Provider;
 use App\Server\PhpVersion;
 use App\Tasks\Whoami;
-use Database\Factories\CredentialsFactory;
 use Database\Factories\ServerFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
@@ -91,29 +89,6 @@ class ServerTest extends TestCase
             new CreateServerOnInfrastructure($server),
             new WaitForServerToConnect($server),
             new ProvisionServer($server, $sshKeys),
-        ]);
-    }
-
-    /** @test */
-    public function it_can_dispatch_and_create_provision_jobs_with_optional_github_credentials()
-    {
-        Bus::fake();
-
-        $server = Server::factory()->create();
-        $credentials = CredentialsFactory::new()->forUser($server->createdByUser)->github()->create();
-
-        $sshKeys = new \Illuminate\Database\Eloquent\Collection([
-            \App\Models\SshKey::factory()->create(),
-        ]);
-
-        $server = $server->fresh();
-        $server->dispatchCreateAndProvisionJobs($sshKeys, $credentials);
-
-        Bus::assertChained([
-            new CreateServerOnInfrastructure($server),
-            new WaitForServerToConnect($server),
-            new ProvisionServer($server, $sshKeys),
-            new AddServerSshKeyToGithub($server, $credentials),
         ]);
     }
 

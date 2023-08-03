@@ -33,5 +33,9 @@ class UpdateUserPublicKey implements ShouldQueue
 
         $this->server->user_public_key = trim($output->getBuffer());
         $this->server->save();
+
+        if ($this->server->githubCredentials) {
+            dispatch(new AddServerSshKeyToGithub($this->server, $this->server->githubCredentials));
+        }
     }
 }

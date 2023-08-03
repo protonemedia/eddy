@@ -31,6 +31,10 @@ class CredentialsFactory extends Factory
             return $this->digitalOcean();
         }
 
+        if ($provider === Provider::HetznerCloud) {
+            return $this->hetznerCloud();
+        }
+
         if ($provider === Provider::Github) {
             return $this->github();
         }
@@ -50,6 +54,19 @@ class CredentialsFactory extends Factory
                 'provider' => Provider::DigitalOcean,
                 'credentials' => [
                     'digital_ocean_token' => 'valid-token',
+                ],
+            ];
+        });
+    }
+
+    public function hetznerCloud()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'My Hetzner Cloud Credentials',
+                'provider' => Provider::HetznerCloud,
+                'credentials' => [
+                    'hetzner_cloud_token' => 'valid-token',
                 ],
             ];
         });

@@ -9,7 +9,6 @@ use App\Infrastructure\Entities\ServerStatus;
 use App\Infrastructure\Entities\ServerType;
 use App\Infrastructure\ProviderFactory;
 use App\Infrastructure\ServerProvider;
-use App\Jobs\AddServerSshKeyToGithub;
 use App\Jobs\CreateServerOnInfrastructure;
 use App\Jobs\ProvisionServer;
 use App\Jobs\WaitForServerToConnect;
@@ -60,6 +59,7 @@ class Server extends Model
     ];
 
     protected $casts = [
+        'add_github_ssh_key' => 'boolean',
         'completed_provision_steps' => AsArrayObject::class,
         'cpu_cores' => 'integer',
         'database_password' => 'encrypted',
@@ -259,7 +259,7 @@ class Server extends Model
     /**
      * Dispatches a chain of jobs to provision the server.
      */
-    public function dispatchCreateAndProvisionJobs(Collection $sshKeys, Credentials $addSshKeyToGithub = null): void
+    public function dispatchCreateAndProvisionJobs(Collection $sshKeys): void
     {
         $server = $this->fresh();
 
@@ -268,10 +268,6 @@ class Server extends Model
             new WaitForServerToConnect($server),
             new ProvisionServer($server, EloquentCollection::make($sshKeys)),
         ];
-
-        if ($addSshKeyToGithub && $addSshKeyToGithub->exists) {
-            $jobs[] = new AddServerSshKeyToGithub($server, $addSshKeyToGithub->fresh());
-        }
 
         Bus::chain($jobs)->dispatch();
     }
@@ -335,6 +331,11 @@ class Server extends Model
     public function credentials(): BelongsTo
     {
         return $this->belongsTo(Credentials::class);
+    }
+
+    public function githubCredentials(): BelongsTo
+    {
+        return $this->belongsTo(Credentials::class, 'github_credentials_id');
     }
 
     public function tasks(): HasMany
