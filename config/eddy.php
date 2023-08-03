@@ -65,4 +65,9 @@ return [
      * A little helper to fake the validation of provider tokens (used in the Dusk tests).
      */
     'fake_credentials_validation' => env('FAKE_CREDENTIALS_VALIDATION', false),
+
+    /**
+     * The default Vagrant box that is used when provisioning a new server.
+     */
+    'vagrant_box' => 'ubuntu/jammy64',
 ];

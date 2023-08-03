@@ -150,9 +150,11 @@ class Vagrant implements ServerProvider
         $id = (string) $this->generateServerId();
         $ipAddress = $this->getPublicIpv4OfServer($id);
 
+        $vagrantBox = config('eddy.vagrant_box');
+
         $vagrantFile = "
 Vagrant.configure(\"2\") do |config|
-  config.vm.box = \"ubuntu/jammy64\"
+  config.vm.box = \"{$vagrantBox}\"
 
   config.vm.provider \"virtualbox\" do |vb|
     vb.name = '{$name}-{$id}'
