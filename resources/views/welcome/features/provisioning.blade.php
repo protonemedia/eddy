@@ -21,4 +21,19 @@
             class="rounded shadow-md sm:w-1/2 md:w-full"
         />
     </div>
+
+    <x-feature-grid>
+        <x-feature icon="heroicon-o-cpu-chip" title="Cloud Providers">
+            Eddy supports Digital Ocean and Hetzner Cloud out of the box, but you can choose any cloud provider you want. All you need is a VPS with root
+            access.
+        </x-feature>
+        <x-feature icon="heroicon-o-inbox-arrow-down" title="Software Installation">
+            Installing and configuring software can be a pain. Eddy takes care of that for you. It installs Caddy, PHP, MySQL, Redis, and all the other tools
+            you need.
+        </x-feature>
+        <x-feature icon="heroicon-o-command-line" title="You are in Control" class="sm:col-span-2 lg:col-span-1">
+            While Eddy does all the work, you're fully in control. Not only can you see exactly what Eddy is doing due to its open source nature, but you can
+            also customize it to your needs.
+        </x-feature>
+    </x-feature-grid>
 </div>

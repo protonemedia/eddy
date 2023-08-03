@@ -12,4 +12,19 @@
 
         <img src="{{ asset('features/editor.png') }}" alt="Easy-to-use interface at Eddy Server Management" class="rounded shadow-md sm:w-1/2 md:w-full" />
     </div>
+
+    <x-feature-grid>
+        <x-feature icon="heroicon-o-circle-stack" title="GitHub Integration">
+            Once you've connected your GitHub account, we can add the server's SSH key to deploy your repositories. When you add a site, we'll automatically
+            list your repositories.
+        </x-feature>
+        <x-feature icon="heroicon-o-document-check" title="Customize configuration files">
+            Most of the important configuration files can be edited through the interface, including Caddy, PHP and MySQL configuration files. It even validates
+            the syntax for you.
+        </x-feature>
+        <x-feature icon="heroicon-o-clock" title="Cronjobs and Daemons" class="sm:col-span-2 lg:col-span-1">
+            Want to run scheduled tasks or background daemons like queues or websockets? No problem! You can easily add cronjobs and daemons through the
+            interface.
+        </x-feature>
+    </x-feature-grid>
 </div>

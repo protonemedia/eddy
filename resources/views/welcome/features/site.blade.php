@@ -13,4 +13,28 @@
             </p>
         </div>
     </div>
+
+    <x-feature-grid>
+        <x-feature icon="heroicon-o-adjustments-horizontal" title="Caddy Web Server">
+            Caddy is our web server of choice. It's fast, secure, and easy to configure. We provide a near-perfect Caddy configuration for each site type.
+        </x-feature>
+        <x-feature icon="heroicon-o-forward" title="Zero Downtime Deployment">
+            Nobody likes downtime. That's why Eddy supports Zero Downtime Deployment out of the box. Deploy your sites with confidence, even on Fridays!
+        </x-feature>
+        <x-feature icon="heroicon-o-lock-closed" title="SSL Certificates">
+            While you can bring your own SSL certificates, Caddy can also automatically provision free SSL certificates using Let's Encrypt or ZeroSSL and
+            automatically renew them.
+        </x-feature>
+        <x-feature icon="heroicon-o-check-badge" title="Optimized per Site">
+            Eddy comes with built-in support for Laravel, generic PHP, static, and Wordpress sites. It provides a starting point for each site type and can be
+            customized to your needs.
+        </x-feature>
+        <x-feature icon="heroicon-o-cursor-arrow-rays" title="Push to Deploy">
+            Deploying your sites from the UI is just a click away. But you can also use version control or CI/CD tools to deploy your sites automatically!
+        </x-feature>
+        <x-feature icon="heroicon-o-bolt" title="PHP version per Site">
+            Not all your sites might be on the same PHP version. Eddy allows you to choose the a version per site, so you can maintain sites at your own pace
+            while still keeping them on the same server.
+        </x-feature>
+    </x-feature-grid>
 </div>
