@@ -175,7 +175,7 @@ class ServerTaskDispatcher
     /**
      * Dispatches the pending task.
      */
-    private function dispatchPendingTask(): ProcessOutput|null
+    private function dispatchPendingTask(): ?ProcessOutput
     {
         try {
             $processOutput = $this->pendingTask->dispatch();

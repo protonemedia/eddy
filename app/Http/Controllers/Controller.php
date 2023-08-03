@@ -33,7 +33,7 @@ class Controller extends BaseController
     /**
      * Log an activity.
      */
-    public function logActivity(string $description, ?Model $subject = null): ActivityLog
+    public function logActivity(string $description, Model $subject = null): ActivityLog
     {
         return ActivityLog::create([
             'team_id' => $this->team()->id,

@@ -68,7 +68,7 @@ class Team extends JetstreamTeam
     /**
      * Get the email address that should be associated with the Paddle customer.
      */
-    public function paddleEmail(): string|null
+    public function paddleEmail(): ?string
     {
         /** @var User */
         $owner = $this->owner;

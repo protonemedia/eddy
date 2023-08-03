@@ -15,8 +15,8 @@ class ServerType
         public readonly int $cpuCores,
         public readonly int $memoryInMb,
         public readonly int $storageInGb,
-        public readonly null|int $monthlyPriceAmount = null,
-        public readonly null|string $monthlyPriceCurrency = null,
+        public readonly ?int $monthlyPriceAmount = null,
+        public readonly ?string $monthlyPriceCurrency = null,
     ) {
 
         $memoryInGb = $this->memoryInMb / 1024;

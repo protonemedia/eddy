@@ -70,7 +70,7 @@ class CaddyfilePatcher
     /**
      * Replaces the TLS snippet for the site with a new one.
      */
-    public function replaceTlsSnippet(TlsSetting $newTlsSetting, ?Certificate $certificate = null): self
+    public function replaceTlsSnippet(TlsSetting $newTlsSetting, Certificate $certificate = null): self
     {
         $lines = explode(PHP_EOL, $this->caddyfile);
 

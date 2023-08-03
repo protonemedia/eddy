@@ -239,7 +239,7 @@ class Site extends Model
     /**
      * Updates the site's Caddyfile with the given PHP version and web folder.
      */
-    public function updateCaddyfile(PhpVersion $phpVersion, string $webFolder, ?User $user = null): void
+    public function updateCaddyfile(PhpVersion $phpVersion, string $webFolder, User $user = null): void
     {
         $this->pending_caddyfile_update_since = now();
         $this->save();

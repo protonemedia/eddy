@@ -24,7 +24,7 @@ abstract class Task extends BaseTask
     {
     }
 
-    public function callbackUrl(): string|null
+    public function callbackUrl(): ?string
     {
         return $this instanceof HasCallbacks ? $this->taskModel?->callbackUrl() : null;
     }
