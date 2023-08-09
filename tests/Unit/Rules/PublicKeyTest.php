@@ -33,4 +33,16 @@ class PublicKeyTest extends TestCase
         $this->assertTrue($validator->fails());
         $this->assertEquals('The public key is not valid.', $validator->errors()->first('public_key'));
     }
+
+    /** @test */
+    public function it_can_validate_a_sk_ecdsa_public_key()
+    {
+        $publicKey = Dummies::skEcdsaPublicKey();
+        $rule = new PublicKey();
+        $validator = Validator::make(
+            ['public_key' => $publicKey],
+            ['public_key' => $rule]
+        );
+        $this->assertFalse($validator->fails());
+    }
 }

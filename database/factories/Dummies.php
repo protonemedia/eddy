@@ -122,4 +122,9 @@ zfxX8AujDifR0lrQf+OnAAAAE2NhZGR5QHByb3RvbmUubWVkaWEBAg==
             type: KeyPairType::Ed25519
         );
     }
+
+    public static function skEcdsaPublicKey(): string
+    {
+        return 'sk-ecdsa-sha2-nistp256@openssh.com AAAAInNrLWVjZHNhLXNoYTItbmlzdHAyNTZAb3BlbnNzaC5jb20AAAAIbmlzdHAyNTYAAABBBGDWCQpV6NYUFXtickmEDX4cpKqwEclZ8I95eKlsLUX2h48RhGNNaddax9trF6eFoHhvfcQaAxT9DiVKlylpTE4AAAAEc3NoOg==';
+    }
 }
