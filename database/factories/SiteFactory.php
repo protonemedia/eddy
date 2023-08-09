@@ -81,7 +81,7 @@ class SiteFactory extends Factory
             'hook_after_updating_repository' => '',
             'hook_before_making_current' => '
 composer install
-npm install
+npm install --prefer-offline --no-audit
 npm run build
 $PHP_BINARY artisan storage:link
 $PHP_BINARY artisan config:cache

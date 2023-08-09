@@ -28,7 +28,7 @@ enum SiteType: string
     {
         $installScript = trim('
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-npm install
+npm install --prefer-offline --no-audit
 npm run build
 $PHP_BINARY artisan storage:link
 $PHP_BINARY artisan config:cache
@@ -67,7 +67,7 @@ $PHP_BINARY artisan event:cache
 
         return [
             $key => trim('
-# npm install
+# npm install --prefer-offline --no-audit
 # npm run build
 '),
         ];
